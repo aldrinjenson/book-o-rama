@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import HomeTabStack from "./HomeTabStack";
 import Header from "../../components/Header";
+import BookDetails from "../../Pages/BookDetails";
 
 const Stack = createStackNavigator();
 
@@ -16,6 +17,7 @@ const HomeStack = () => {
           headerTitle: () => <Header navigation={navigation} />,
         })}
       />
+      <Stack.Screen name='BookDetails' component={BookDetails} />
     </Stack.Navigator>
   );
 };

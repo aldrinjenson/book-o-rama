@@ -1,0 +1,15 @@
+export const categories = [
+  { id: "1", name: "Action" },
+  { id: "2", name: "Adventure" },
+  { id: "3", name: "Arcade" },
+  { id: "4", name: "Fiction" },
+  { id: "5", name: "Science Fiction" },
+  { id: "6", name: "Romance" },
+  { id: "7", name: "Drama" },
+  { id: "8", name: "Sports" },
+  { id: "9", name: "Poetry" },
+  { id: "10", name: "Plays" },
+  { id: "11", name: "Classics" },
+  { id: "12", name: "Horror" },
+  { id: "13", name: "Tragedy" },
+];

@@ -5,9 +5,9 @@ import { MaterialIcons } from "@expo/vector-icons";
 const Header = ({navigation}) => {
   return (
     <View style={styles.headerBg}>
-      <MaterialIcons onPress={()=>navigation.openDrawer()} name="menu" size={28} style={styles.icon} />
+      <MaterialIcons onPress={()=>navigation.openDrawer()} name="menu" size={32} style={styles.icon} />
       <Text style={styles.headerTitle} >Book-o-Rama</Text>
-      <MaterialIcons name="person" size={28} style={styles.icon} />
+      <MaterialIcons name="person" size={32} style={styles.icon} />
     </View>
   );
 };
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontWeight: "bold",
-    fontSize: 20,
+    fontSize: 25,
     color: "#333",
     letterSpacing: 1,
     alignSelf:'center'

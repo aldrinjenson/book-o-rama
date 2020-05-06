@@ -1,9 +1,15 @@
 import React from "react";
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 import Book from "./Book";
 import { globalStyles } from "../global/globalStyles";
 
-const BookCollection = ({ collection }) => {
+const BookCollection = ({ collection, navigation }) => {
   return (
     <View style={styles.collection}>
       <Text style={styles.collectionTitle}>
@@ -11,12 +17,16 @@ const BookCollection = ({ collection }) => {
       </Text>
       <ScrollView horizontal style={styles.horizontalScroll}>
         {collection.books.map((item) => (
-          <Book
+          <TouchableOpacity
             key={item.key}
-            name={item.name}
-            author={item.author}
-            imageUrl={item.imageUrl}
-          />
+            onPress={() => navigation.navigate("BookDetails", item)}
+          >
+            <Book
+              name={item.name}
+              author={item.author}
+              imageUrl={item.imageUrl}
+            />
+          </TouchableOpacity>
         ))}
       </ScrollView>
     </View>
@@ -30,17 +40,17 @@ const styles = StyleSheet.create({
     flex: 1,
     borderWidth: 1,
     borderColor: "#ddd",
-    height: "33%",
     paddingHorizontal: 10,
     marginVertical: 20,
+    marginHorizontal: 10,
   },
   collectionTitle: {
     ...globalStyles.title,
+    marginVertical: 4,
+    paddingVertical: 1,
   },
   horizontalScroll: {
-    borderWidth: 1,
-    borderColor: "#999",
-    padding: 6,
+    paddingVertical: 6,
     marginVertical: 6,
   },
 });

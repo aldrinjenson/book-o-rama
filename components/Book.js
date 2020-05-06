@@ -1,13 +1,15 @@
 import React from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
+import { Card } from "react-native-paper";
 
 const Book = ({ name, author, imageUrl }) => {
   return (
-    <View style={styles.bookCard}>
-      <Image source={imageUrl} style={styles.bookImage} resizeMode='contain' />
-      <Text style={styles.bookName}>{name}</Text>
-      <Text style={styles.bookAuthor}>{author}</Text>
-    </View>
+    <Card style={styles.bookCard}>
+      <Card.Cover source={imageUrl} />
+      <Card.Content>
+        <Card.Title title={name} subtitle={author} />
+      </Card.Content>
+    </Card>
   );
 };
 
@@ -15,20 +17,7 @@ export default Book;
 
 const styles = StyleSheet.create({
   bookCard: {
-    // flex: 1,
-    // height: '33%'
     paddingHorizontal: 6,
-    margin: 4
+    marginHorizontal: 4,
   },
-  bookImage: {
-    alignSelf: "center",
-    // width: "80%",
-    // height: "80%",
-  },
-  bookName:{
-    fontWeight:'900'
-  },
-  bookAuthor:{
-
-  }
 });

@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
-import ProfilePage from "../drawers/ProfilePage";
+import ProfilePage from "../Pages/ProfilePage";
 
 const Stack = createStackNavigator();
 
