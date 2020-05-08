@@ -1,35 +1,39 @@
-import React, { useState } from 'react'
-import { StyleSheet, Text, View, TextInput } from 'react-native'
+import React, { useState } from "react";
+import { StyleSheet, Text, View, TextInput } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 
-const SearchBar = () => {
+const SearchBar = ({ setValue, placeholder }) => {
+  const [query, setQuery] = useState("");
 
-  const [query, setQuery] = useState('')
+  const handleSubmit = () => {
+    setValue(query);
+  };
 
   return (
     <View style={styles.searchBar}>
-      <MaterialIcons name="search" size={25} />
       <TextInput
-        placeholder="Search from a list of over 1000 books"
+        // style={styles.TextInput}
+        placeholder={placeholder}
         value={query}
         onChangeText={(value) => setQuery(value)}
       />
+      <MaterialIcons name="search" size={25} onPress={handleSubmit} />
     </View>
   );
-}
+};
 
-export default SearchBar
+export default SearchBar;
 
 const styles = StyleSheet.create({
-  searchBar:{
-    flexDirection:'row',
+  searchBar: {
+    flexDirection: "row",
     borderWidth: 1,
-    borderColor: '#bbb',
+    borderColor: "#bbb",
     borderRadius: 28,
-    width: '85%',
-    justifyContent:'space-around',
+    width: "85%",
+    justifyContent: "space-around",
     padding: 5,
     marginVertical: 20,
-    alignSelf:'center'
+    alignSelf: "center",
   },
-})
+});

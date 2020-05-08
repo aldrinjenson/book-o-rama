@@ -1,46 +1,58 @@
 import React, { useState } from "react";
-import { StyleSheet, View, FlatList } from "react-native";
+import {
+  StyleSheet,
+  View,
+  FlatList,
+  Button,
+  ActivityIndicator,
+} from "react-native";
 import { globalStyles } from "../global/globalStyles";
-import SearchBar from "../components/SearchBar";
 import BookCollection from "../components/BookCollection";
 import { collections } from "../data/CollectionList";
-import { Modal, Portal, Text, Button } from "react-native-paper";
-import { FAB } from "react-native-paper";
+import axios from "axios";
 
 const HomeTab = ({ navigation }) => {
-  const [visible, setVisible] = useState(false);
+  const [topBooksList, setTopBooksList] = useState([]);
+
+  const handleClick = () => {
+    const fetchData = async () => {
+      const query = "lists/overview.json";
+      const baseUrl = "https://api.nytimes.com/svc/books/v3/";
+      const apiKey = "ds3m2kNA6cZBkueVBxgYWA67QEIWA9W6";
+      const API_URL = baseUrl + query + "?api-key=" + apiKey;
+      try {
+        const res = await axios.get(API_URL);
+        setTopBooksList(res.data.results.lists);
+        console.log(res.data.results.lists);
+      } catch (error) {
+        console.log("error in accessing" + error);
+      }
+    };
+    fetchData();
+  };
 
   return (
     <View style={{ ...globalStyles.container, justifyContent: "flex-start" }}>
-      
-      <Portal>
-        <Modal visible={visible} onDismiss={() => setVisible(false)}>
-          <SearchBar />
-        </Modal>
-      </Portal>
-
-      <FlatList
-        data={collections}
-        renderItem={({ item }) => (
-          <BookCollection
-            key={item.key}
-            collection={item}
-            navigation={navigation}
-          />
-        )}
-      />
-      <FAB icon="magnify" style={styles.fab} onPress={()=>setVisible(true)}  />
+      <Button title="get Results" onPress={handleClick} />
+      {!topBooksList.length ? (
+        <ActivityIndicator size="large" color="0000ff" />
+      ) : (
+        <FlatList
+          keyExtractor={(item, index) => item.list_id.toString()}
+          data={topBooksList}
+          renderItem={({ item }) => (
+            <BookCollection
+              key={item.list_id}
+              collection={item}
+              navigation={navigation}
+            />
+          )}
+        />
+      )}
     </View>
   );
 };
 
 export default HomeTab;
 
-const styles = StyleSheet.create({
-  fab: {
-    position: "absolute",
-    margin: 16,
-    right: 0,
-    bottom: 0,
-  },
-});
+const styles = StyleSheet.create({});

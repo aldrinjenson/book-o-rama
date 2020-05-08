@@ -6,12 +6,19 @@ export const globalStyles = StyleSheet.create({
     // justifyContent: "center",
     // alignItems: "center",
     padding: 6,
-    margin:6
+    margin: 6,
   },
-  title:{
-    // fontWeight:'bold',
+  title: {
+    fontWeight: "bold",
     fontSize: 18,
     padding: 4,
-    margin:4
-  }
+    margin: 4,
+    color: "#333",
+    flexWrap: "wrap",
+  },
+  subTitle: {
+    fontSize: 15,
+    color: "#aaa",
+    flexWrap: "wrap",
+  },
 });

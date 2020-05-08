@@ -10,21 +10,30 @@ import Book from "./Book";
 import { globalStyles } from "../global/globalStyles";
 
 const BookCollection = ({ collection, navigation }) => {
+  const handleClick = (item) => {
+    const book = {
+      name: item.title,
+      authors: item.author,
+      imageUrl: item.book_image,
+      description: item.description,
+      publisher: item.publisher,
+    };
+    navigation.navigate("BookDetails", book);
+  };
+
   return (
     <View style={styles.collection}>
-      <Text style={styles.collectionTitle}>
-        {collection.title.toUpperCase()}
-      </Text>
+      <Text style={styles.collectionTitle}>{collection.display_name}</Text>
       <ScrollView horizontal style={styles.horizontalScroll}>
         {collection.books.map((item) => (
           <TouchableOpacity
-            key={item.key}
-            onPress={() => navigation.navigate("BookDetails", item)}
+            key={item.primary_isbn10}
+            onPress={()=>handleClick(item)}
           >
             <Book
-              name={item.name}
+              name={item.title}
               author={item.author}
-              imageUrl={item.imageUrl}
+              imageUrl={item.book_image}
             />
           </TouchableOpacity>
         ))}

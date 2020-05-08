@@ -1,9 +1,9 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeTab from "../../tabs/HomeTab";
-import MyReadingList from "../../tabs/MyReadingListTab";
 import AllCategories from "../../tabs/AllCategoriesTab";
 import { MaterialIcons } from "@expo/vector-icons";
+import SearchBooks from "../../tabs/SearchBooksTab";
 
 const Tab = createBottomTabNavigator();
 
@@ -18,10 +18,10 @@ const HomeTabStack = () => {
         }}
       />
       <Tab.Screen
-        name="ReadingList"
-        component={MyReadingList}
+        name="SearchBooks"
+        component={SearchBooks}
         options={{
-          tabBarIcon: () => <MaterialIcons name="book" size={23} />,
+          tabBarIcon: () => <MaterialIcons name="search" size={23} />,
         }}
       />
       <Tab.Screen

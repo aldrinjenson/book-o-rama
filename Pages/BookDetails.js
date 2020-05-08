@@ -1,36 +1,112 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import {
+  StyleSheet,
+  Image,
+  Text,
+  View,
+  Button,
+  ScrollView,
+} from "react-native";
 import { globalStyles } from "../global/globalStyles";
-import { Avatar, Button, Card, Title, Paragraph } from "react-native-paper";
 
 const BookDetails = ({ route }) => {
-  const { name, author, imageUrl } = route.params;
+  const {
+    name,
+    authors,
+    imageUrl,
+    rating,
+    publisher,
+    description,
+    // categories,
+    infoLink,
+    WebReaderLink,
+  } = route.params;
+
   return (
-    <Card style={styles.BookDetailsCard} >
-      <Card.Title title={name} subtitle={author}  />
-      <Card.Cover source={imageUrl} />
-      <Card.Content>
-        <Title>Summary</Title>
-        <Paragraph>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempora, in delectus impedit nam, sint eaque id, doloribus porro a officia dicta repellat consequatur amet sequi quisquam vel optio quam maxime....</Paragraph>
-        <Paragraph>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempora, in delectus impedit nam, sint eaque id, doloribus porro a officia dicta repellat consequatur amet sequi quisquam vel optio quam maxime....</Paragraph>
-      </Card.Content>
-      <Card.Actions>
-        <Button>Add To WishList</Button>
-        <Button>Read Now</Button>
-      </Card.Actions>
-    </Card>
+    <ScrollView>
+      <View style={styles.BookDetailsCard}>
+        <View style={styles.topPart}>
+          <Image
+            source={{ uri: imageUrl }}
+            resizeMode="contain"
+            style={styles.bookImage}
+          />
+          <View style={styles.topTexts}>
+            <Text style={globalStyles.title}>{name}</Text>
+            <Text style={globalStyles.subTitle}>{authors.map(author=><Text>{author}</Text>) || authors}</Text>
+            <Text style={styles.subKey}>
+              Publisher: <Text style={styles.subValue}>{publisher}</Text>
+            </Text>
+            {/* <Text style={styles.subKey}>
+              Categories:
+              {categories.map((category) => (
+                <Text key={category}>
+                  <Text style={styles.subValue}>{category}</Text>
+                </Text>
+              ))}
+            </Text> */}
+          </View>
+        </View>
+        <View style={styles.middle}>
+          <Text style={styles.subKey}>
+            Rating: <Text style={styles.subValue}>{rating}</Text>
+          </Text>
+          <Text style={styles.subKey}>Description:</Text>
+          <Text style={styles.description}>{description}</Text>
+        </View>
+      </View>
+    </ScrollView>
   );
 };
 
 export default BookDetails;
 
 const styles = StyleSheet.create({
-  BookDetailsCard:{
-    // flex:1,
-    margin:15,
-    paddingHorizontal:10,
-    paddingTop:10,
-    paddingBottom:42,
-    elevation:10
-  }
+  BookDetailsCard: {
+    flex: 1,
+    margin: 15,
+    // paddingHorizontal:10,
+    // paddingTop:10,
+    // paddingBottom:42,
+    elevation: 10,
+  },
+  topPart: {
+    flexDirection: "row",
+    // borderWidth: 1,
+    borderColor: "#777",
+    // justifyContent:'space-between',
+  },
+  topTexts: {
+    flex: 1,
+    flexDirection: "column",
+    // borderWidth: 1,
+    justifyContent: "space-between",
+    marginHorizontal: 6,
+    padding: 4,
+  },
+  bookImage: {
+    // borderWidth: 1,
+    // flex: 1,
+    height: 250,
+    width: 155,
+    marginHorizontal: 6,
+    paddingHorizontal: 6,
+  },
+  subKey: {
+    fontWeight: "bold",
+    paddingTop: 5,
+  },
+  subValue: {
+    fontWeight: "normal",
+  },
+  // description:{
+  //   letterSpacing:1.5,
+  //   lineHeight:19
+  // }
+  middle: {
+    flex: 1,
+    justifyContent: "space-between",
+    paddingVertical: 6,
+    paddingHorizontal: 4,
+  },
 });
