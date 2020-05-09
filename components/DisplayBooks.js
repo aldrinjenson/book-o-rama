@@ -13,37 +13,46 @@ const DisplayBooks = ({ books, navigation }) => {
   if (!books.length) return null;
 
   const handleClick = (item) => {
-    const book = {
+    let book = {
       name: item.volumeInfo.title,
-      authors: item.volumeInfo.authors,
-      rating: item.volumeInfo.averageRating,
-      publisher:item.volumeInfo.publisher,
+      publisher: item.volumeInfo.publisher,
       description: item.volumeInfo.description,
+      publishedDate: item.volumeInfo.publishedDate,
+      isFromNY: false,
+      rating: item.volumeInfo.averageRating,
+      imageUrl: item.imageSource,
+      authors: item.authors,
       categories: item.volumeInfo.categories,
-      imageUrl: item.volumeInfo.imageLinks.thumbnail,
-      webReaderLink: item.volumeInfo.webReaderLink,
-      infoLink: item.volumeInfo.infoLink,
+      previewLink: item.volumeInfo.previewLink,
+      buyLink:
+        "https://www.amazon.in/dp/" +
+        item.volumeInfo.industryIdentifiers[0].identifier,
+      bookId: item.id,
     };
     navigation.navigate("BookDetails", book);
+    // navigation.navigate("BookDetails", item);
   };
-
   return (
-    <View style={styles.bookList} >
+    <View style={styles.bookList}>
       <FlatList
         data={books}
         renderItem={({ item }) => {
+          let imageSource = item.volumeInfo.imageLinks
+            ? { uri: `${item.volumeInfo.imageLinks.thumbnail}` }
+            : require("../assets/no_preview_image.png");
+          let authors = item.volumeInfo.authors
+            ? item.volumeInfo.authors
+            : [];
           return (
             <TouchableOpacity
               style={styles.horizonatalCard}
-              onPress={() => handleClick(item)}
+              onPress={() => handleClick({ ...item, imageSource, authors })}
             >
-              <Image
-                source={{ uri: `${item.volumeInfo.imageLinks.smallThumbnail}` }}
-                style={styles.bookImage}
-              />
+              <Image style={styles.bookImage} source={imageSource} />
               <View style={styles.textContent}>
                 <Text style={globalStyles.title}>{item.volumeInfo.title}</Text>
-                <Text>{item.volumeInfo.authors[0]}</Text>
+
+                <Text>{authors[0]}</Text>
               </View>
             </TouchableOpacity>
           );
@@ -75,7 +84,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignSelf: "flex-start",
   },
-  bookList:{
-    marginBottom:90,
-  }
+  bookList: {
+    marginBottom: 90,
+  },
 });

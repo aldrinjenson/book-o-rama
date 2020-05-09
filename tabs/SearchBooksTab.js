@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, ActivityIndicator } from "react-native";
 import { globalStyles } from "../global/globalStyles";
 import SearchBar from "../components/SearchBar";
 import DisplayBooks from "../components/DisplayBooks";
 import axios from "axios";
 
-const SearchBooks = ({navigation}) => {
+const SearchBooks = ({ navigation }) => {
   const [books, setBooks] = useState([]);
   const [isLoading, setisLoading] = useState(false);
   const bookQuery = (query) => {
@@ -14,7 +14,6 @@ const SearchBooks = ({navigation}) => {
       const API_URL = `https://www.googleapis.com/books/v1/volumes`;
       try {
         const result = await axios.get(`${API_URL}?q=${query}`);
-        // const result = await axios.get(`${API_URL}?q=Harry+Potter`);
         setBooks(result.data.items);
         setisLoading(false);
       } catch (error) {
@@ -27,8 +26,19 @@ const SearchBooks = ({navigation}) => {
   return (
     <View style={globalStyles.container}>
       <Text>Search Popular books</Text>
-      <SearchBar setValue={bookQuery} placeholder="eg. Harry Potter" />
-      {isLoading ? <Text>Loading...</Text> : <DisplayBooks books={books} navigation={navigation} />}
+      <SearchBar
+        setValue={bookQuery}
+        placeholder="Try 'Harry Potter' or 'J.K.
+      Rowling' "
+      />
+      {isLoading ? (
+        <View>
+          <ActivityIndicator size="large" color="0000ff" />
+          <Text style={{ alignSelf: "center" }}>Loading...</Text>
+        </View>
+      ) : (
+        <DisplayBooks books={books} navigation={navigation} />
+      )}
     </View>
   );
 };

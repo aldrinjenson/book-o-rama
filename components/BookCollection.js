@@ -13,10 +13,11 @@ const BookCollection = ({ collection, navigation }) => {
   const handleClick = (item) => {
     const book = {
       name: item.title,
-      authors: item.author,
-      imageUrl: item.book_image,
-      description: item.description,
+      imageUrl: { uri: item.book_image },
       publisher: item.publisher,
+      isFromNY: true,
+      isbn13: item.primary_isbn13,
+      buyLink: item.buy_links[0].url
     };
     navigation.navigate("BookDetails", book);
   };
@@ -27,8 +28,8 @@ const BookCollection = ({ collection, navigation }) => {
       <ScrollView horizontal style={styles.horizontalScroll}>
         {collection.books.map((item) => (
           <TouchableOpacity
-            key={item.primary_isbn10}
-            onPress={()=>handleClick(item)}
+            key={item.primary_isbn13}
+            onPress={() => handleClick(item)}
           >
             <Book
               name={item.title}
