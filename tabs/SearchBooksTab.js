@@ -14,7 +14,7 @@ const SearchBooks = ({ navigation }) => {
       const API_URL = `https://www.googleapis.com/books/v1/volumes`;
       try {
         const result = await axios.get(`${API_URL}?q=${query}`);
-        setBooks(result.data.items);
+        result.data && setBooks(result.data.items);
         setisLoading(false);
       } catch (error) {
         console.log("Error: " + error);
@@ -25,7 +25,7 @@ const SearchBooks = ({ navigation }) => {
 
   return (
     <View style={globalStyles.container}>
-      <Text>Search Popular books</Text>
+      <Text>Search Popular books or authors</Text>
       <SearchBar
         setValue={bookQuery}
         placeholder="Try 'Harry Potter' or 'J.K.

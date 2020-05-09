@@ -1,15 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, View, FlatList } from "react-native";
 import { globalStyles } from "../global/globalStyles";
 import { categories } from "../data/Categories";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Title } from "react-native-paper";
+import DisplayBooks from "../components/DisplayBooks";
 
-const AllCategories = () => {
+const WishList = ({ navigation }) => {
+  
+  const [wishList, setWishList] = useState([]);
+
+  // const addToWishList = (newBook) => {
+  //   setWishList((prevstate) => {
+  //     return [...prevstate, newBook];
+  //   });
+  // };
+
   return (
     <View style={globalStyles.container}>
-      <Title style={globalStyles.title} >All Categories</Title>
-      <FlatList
+      <Title style={globalStyles.title}>My Wish List</Title>
+      {/* <FlatList
         data={categories}
         renderItem={({ item }) => (
           <TouchableOpacity style={styles.categoryCard}>
@@ -18,12 +28,15 @@ const AllCategories = () => {
             </View>
           </TouchableOpacity>
         )}
-      />
+      /> */}
+
+      <DisplayBooks books={wishList} navigation={navigation} />
+
     </View>
   );
 };
 
-export default AllCategories;
+export default WishList;
 
 const styles = StyleSheet.create({
   categoryCard: {

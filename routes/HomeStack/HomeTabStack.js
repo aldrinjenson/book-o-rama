@@ -1,16 +1,16 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeTab from "../../tabs/HomeTab";
-import AllCategories from "../../tabs/AllCategoriesTab";
 import { MaterialIcons } from "@expo/vector-icons";
 import SearchBooks from "../../tabs/SearchBooksTab";
+import WishList from "../../tabs/WishList";
 
 const Tab = createBottomTabNavigator();
 
 const HomeTabStack = () => {
   return (
-    <Tab.Navigator 
-    // initialRouteName='SearchBooks' 
+    <Tab.Navigator
+    // initialRouteName='SearchBooks'
     >
       <Tab.Screen
         name="HomeTab"
@@ -27,10 +27,10 @@ const HomeTabStack = () => {
         }}
       />
       <Tab.Screen
-        name="AllCategories"
-        component={AllCategories}
+        name="WishList"
+        component={WishList}
         options={{
-          tabBarIcon: () => <MaterialIcons name="list" size={23} />,
+          tabBarIcon: () => <MaterialIcons name="bookmark" size={23} />,
         }}
       />
     </Tab.Navigator>

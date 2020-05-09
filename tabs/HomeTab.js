@@ -32,7 +32,6 @@ const HomeTab = ({ navigation }) => {
 
   return (
     <View style={{ ...globalStyles.container, justifyContent: "flex-start" }}>
-      {/* <Button title="get Results" onPress={handleClick} /> */}
       {!topBooksList.length ? (
         <ActivityIndicator
           size="large"

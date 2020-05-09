@@ -10,7 +10,11 @@ import {
 import { globalStyles } from "../global/globalStyles";
 
 const DisplayBooks = ({ books, navigation }) => {
-  if (!books.length) return null;
+  
+  if (!books) return (<View style={{justifyContent:'center', alignItems:'center', marginTop:200}} >
+    <Text>Sorry, No such book exists in our database!!</Text>
+    <Text>Please check your search query</Text>
+  </View>);
 
   const handleClick = (item) => {
     let book = {
@@ -51,7 +55,6 @@ const DisplayBooks = ({ books, navigation }) => {
               <Image style={styles.bookImage} source={imageSource} />
               <View style={styles.textContent}>
                 <Text style={globalStyles.title}>{item.volumeInfo.title}</Text>
-
                 <Text>{authors[0]}</Text>
               </View>
             </TouchableOpacity>

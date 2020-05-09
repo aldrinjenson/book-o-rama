@@ -8,8 +8,7 @@ import {
   ScrollView,
   Linking,
 } from "react-native";
-import { globalStyles } from "../global/globalStyles";
-import { ActivityIndicator } from "react-native-paper";
+import { ActivityIndicator, FAB } from "react-native-paper";
 import axios from "axios";
 
 const BookDetails = ({ route }) => {
@@ -38,10 +37,10 @@ const BookDetails = ({ route }) => {
         isbn10:
           result.data.items[0].volumeInfo.industryIdentifiers[0].identifier,
       });
-
       setIsLoaded(true);
     } catch (error) {
       console.log("Error " + error);
+      return <Text>Error</Text>;
     }
   };
 
@@ -56,80 +55,104 @@ const BookDetails = ({ route }) => {
     //   cleanup
     // }
   }, []);
-
-  console.log(book)
   return (
-    <ScrollView>
+    <View style={styles.page}>
       {isLoaded ? (
-        <View style={styles.BookDetailsCard}>
-          <View style={styles.topPart}>
-            <Image
-              source={book.imageUrl}
-              resizeMode="contain"
-              style={styles.bookImage}
-            />
-            <View style={styles.topTexts}>
-              <Text style={styles.title}>{book.name}</Text>
-              <View>
-                {book.authors && book.authors.map((author) => (
-                  <Text key={author}>{author}</Text>
-                ))}
-                {book.rating ? (
-                  <Text style={styles.subKey}>Rating: {book.rating}</Text>
-                ) : (
-                  <Text>Not rated</Text>
-                )}
+        <View style={styles.bookDetailsPage}>
+          <ScrollView style={{ flex: 1 }}>
+            <View style={styles.BookDetailsCard}>
+              <View style={styles.topPart}>
+                <Image
+                  source={book.imageUrl}
+                  resizeMode="contain"
+                  style={styles.bookImage}
+                />
+                <View style={styles.topTexts}>
+                  <Text style={styles.title}>{book.name}</Text>
+                  <View>
+                    {book.authors &&
+                      book.authors.map((author) => (
+                        <Text key={author}>{author}</Text>
+                      ))}
+                    {book.rating ? (
+                      <Text style={styles.subKey}>Rating: {book.rating}</Text>
+                    ) : (
+                      <Text style={styles.subKey}>Not rated</Text>
+                    )}
+                  </View>
+                  <Text style={styles.subKey}>
+                    Publisher:{" "}
+                    <Text style={styles.subValue}>{book.publisher}</Text>
+                  </Text>
+                  <Button
+                    title="More Details"
+                    onPress={() => Linking.openURL(book.previewLink)}
+                  />
+                </View>
               </View>
-              <Text style={styles.subKey}>
-                Publisher: <Text style={styles.subValue}>{book.publisher}</Text>
-              </Text>
-              <Button
-                title="More Details"
-                onPress={() => Linking.openURL(book.previewLink)}
-              />
-            </View>
-          </View>
-          <View style={styles.middle}>
-            <View>
-              <Text style={styles.subKey}>
-                Published Date: {book.publishedDate}
-              </Text>
-              {book.categories && (
-                <Text style={styles.subKey}>
-                  Categories: {book.categories.map((category) => category)}
-                </Text>
-              )}
-              <Button
-                title="Buy Now"
-                onPress={() => Linking.openURL(book.buyLink)}
-              />
-            </View>
+              <View style={styles.middle}>
+                <View>
+                  <Text style={styles.subKey}>
+                    Published Date: {book.publishedDate}
+                  </Text>
+                  {book.categories && (
+                    <Text style={styles.subKey}>
+                      Categories: {book.categories.map((category) => category)}
+                    </Text>
+                  )}
+                  <Button
+                    title="Buy Now"
+                    onPress={() => Linking.openURL(book.buyLink)}
+                  />
+                </View>
 
-            {book.description && (
-              <Text style={styles.subKey}>Description:</Text>
-            )}
-            <Text style={styles.subValue}>{book.description}</Text>
-          </View>
+                <Text style={styles.subKey}>
+                  Description:
+                  {book.description ? (
+                    <Text style={styles.subValue}>{book.description}</Text>
+                  ) : (
+                    <Text> Not available</Text>
+                  )}
+                </Text>
+              </View>
+            </View>
+          </ScrollView>
+          <FAB
+            style={styles.fab}
+            icon="bookmark"
+            onPress={() => console.log("Pressed")}
+          />
         </View>
       ) : (
-        <View>
+        <View style={{ justifyContent: "center", alignItems: "center" }}>
+          <ActivityIndicator size="large" color="0000ff" />
           <Text>Loading...</Text>
         </View>
       )}
-    </ScrollView>
+    </View>
   );
 };
 
 export default BookDetails;
 
 const styles = StyleSheet.create({
+  page: {
+    flex: 1,
+  },
+  bookDetailsPage: {
+    flex: 1,
+  },
+
   BookDetailsCard: {
     flex: 1,
-    margin: 15,
-    // paddingHorizontal:10,
-    // paddingTop:10,
-    // paddingBottom:42,
+    marginHorizontal: 15,
     elevation: 10,
+  },
+  fab: {
+    position: "absolute",
+    margin: 20,
+    right: 0,
+    bottom: 0,
   },
   title: {
     fontWeight: "bold",
@@ -138,21 +161,17 @@ const styles = StyleSheet.create({
   },
   topPart: {
     flexDirection: "row",
-    // borderWidth: 1,
+    flex: 1,
     borderColor: "#777",
-    // justifyContent:'space-between',
   },
   topTexts: {
     flex: 1,
     flexDirection: "column",
-    // borderWidth: 1,
     justifyContent: "space-around",
     marginHorizontal: 6,
     padding: 4,
   },
   bookImage: {
-    // borderWidth: 1,
-    // flex: 1,
     height: 250,
     width: 155,
     marginHorizontal: 6,
@@ -168,14 +187,11 @@ const styles = StyleSheet.create({
     lineHeight: 22,
     paddingTop: 5,
   },
-  // description:{
-  //   letterSpacing:1.5,
-  //   lineHeight:19
-  // }
   middle: {
     flex: 1,
     justifyContent: "space-between",
-    paddingVertical: 6,
+    paddingTop: 6,
     paddingHorizontal: 4,
+    marginBottom: 80,
   },
 });
