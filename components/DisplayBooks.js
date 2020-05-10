@@ -16,6 +16,8 @@ const DisplayBooks = ({ books, navigation }) => {
     <Text>Please check your search query</Text>
   </View>);
 
+  console.log(books)
+
   const handleClick = (item) => {
     let book = {
       name: item.volumeInfo.title,

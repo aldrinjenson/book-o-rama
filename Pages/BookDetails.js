@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
   StyleSheet,
   Image,
@@ -10,12 +10,14 @@ import {
 } from "react-native";
 import { ActivityIndicator, FAB } from "react-native-paper";
 import axios from "axios";
+import { WishListContext } from "../contexts/wishListContext";
 
 const BookDetails = ({ route }) => {
   const { isFromNY } = route.params;
   const [isLoaded, setIsLoaded] = useState(false);
 
   const [book, setBook] = useState({});
+  const { addNewBookToWishList } = useContext(WishListContext);
 
   const fetchData = async () => {
     const { isbn13, imageUrl, buyLink } = route.params;
@@ -120,7 +122,7 @@ const BookDetails = ({ route }) => {
           <FAB
             style={styles.fab}
             icon="bookmark"
-            onPress={() => console.log("Pressed")}
+            onPress={() => addNewBookToWishList(book)}
           />
         </View>
       ) : (
@@ -134,7 +136,6 @@ const BookDetails = ({ route }) => {
 };
 
 export default BookDetails;
-
 const styles = StyleSheet.create({
   page: {
     flex: 1,

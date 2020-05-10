@@ -1,37 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { StyleSheet, Text, View, FlatList } from "react-native";
 import { globalStyles } from "../global/globalStyles";
-import { categories } from "../data/Categories";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { Title } from "react-native-paper";
 import DisplayBooks from "../components/DisplayBooks";
+import { WishListContext } from "../contexts/wishListContext";
 
 const WishList = ({ navigation }) => {
-  
-  const [wishList, setWishList] = useState([]);
-
-  // const addToWishList = (newBook) => {
-  //   setWishList((prevstate) => {
-  //     return [...prevstate, newBook];
-  //   });
-  // };
+  const { wishList } = useContext(WishListContext);
+  console.log(wishList);
 
   return (
-    <View style={globalStyles.container}>
+    <View style={{ ...globalStyles.container, flex: 1 }}>
       <Title style={globalStyles.title}>My Wish List</Title>
-      {/* <FlatList
-        data={categories}
-        renderItem={({ item }) => (
-          <TouchableOpacity style={styles.categoryCard}>
-            <View style={styles.categoryCardContent}>
-              <Text>{item.name}</Text>
-            </View>
-          </TouchableOpacity>
-        )}
-      /> */}
-
-      <DisplayBooks books={wishList} navigation={navigation} />
-
+      {wishList.length ? (
+        <DisplayBooks books={wishList} navigation={navigation} />
+      ) : (
+        <View style={styles.emptyWishListMessage}>
+          <Text style={styles.emptyWishListMessageText}>
+            Your wishList is currently empty!!
+          </Text>
+          <Text style={styles.emptyWishListMessageText}>
+            You can add intersting books to your wishlist by clicking on the
+            floating button on the right bottom
+          </Text>
+        </View>
+      )}
     </View>
   );
 };
@@ -57,5 +50,14 @@ const styles = StyleSheet.create({
     marginHorizontal: 18,
     marginVertical: 20,
     // backgroundColor:'pink'
+  },
+  emptyWishListMessage: {
+    marginTop: 100,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  emptyWishListMessageText: {
+    padding: 6,
+    margin: 6,
   },
 });

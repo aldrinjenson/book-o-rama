@@ -2,6 +2,7 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { RootDrawerNavigator } from "./routes/RootDrawerNavigator";
 import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
+import WishListContextProvider from "./contexts/wishListContext";
 
 const theme = {
   ...DefaultTheme,
@@ -10,14 +11,16 @@ const theme = {
   //   ...DefaultTheme.colors,
   //   primary:'#2ab'
   // }
-}
+};
 
 export default function App() {
   return (
     <NavigationContainer>
-      <PaperProvider theme={theme} >
-        <RootDrawerNavigator />
-      </PaperProvider>
+      <WishListContextProvider>
+        <PaperProvider theme={theme}>
+          <RootDrawerNavigator />
+        </PaperProvider>
+      </WishListContextProvider>
     </NavigationContainer>
   );
 }
