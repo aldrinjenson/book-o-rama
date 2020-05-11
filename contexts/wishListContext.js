@@ -6,10 +6,8 @@ const WishListContextProvider = (props) => {
   const [wishList, setWishList] = useState([]);
 
   const addNewBookToWishList = (book) => {
-    console.log(book)
     setWishList((prevState) => [...prevState, book]);
   };
-
   return (
     <WishListContext.Provider value={{ wishList, addNewBookToWishList }}>
       {props.children}

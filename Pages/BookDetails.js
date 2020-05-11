@@ -57,6 +57,14 @@ const BookDetails = ({ route }) => {
     //   cleanup
     // }
   }, []);
+
+  const [fabClicked, setFabClicked] = useState(false);
+  const handleFABClick = () => {
+    if (fabClicked) return null;
+    addNewBookToWishList(book);
+    setFabClicked(true)
+  };
+
   return (
     <View style={styles.page}>
       {isLoaded ? (
@@ -119,11 +127,7 @@ const BookDetails = ({ route }) => {
               </View>
             </View>
           </ScrollView>
-          <FAB
-            style={styles.fab}
-            icon="bookmark"
-            onPress={() => addNewBookToWishList(book)}
-          />
+          <FAB style={styles.fab} icon="bookmark" onPress={handleFABClick} />
         </View>
       ) : (
         <View style={{ justifyContent: "center", alignItems: "center" }}>

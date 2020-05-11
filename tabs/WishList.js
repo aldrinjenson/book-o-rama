@@ -13,7 +13,8 @@ const WishList = ({ navigation }) => {
     <View style={{ ...globalStyles.container, flex: 1 }}>
       <Title style={globalStyles.title}>My Wish List</Title>
       {wishList.length ? (
-        <DisplayBooks books={wishList} navigation={navigation} />
+        // <DisplayBooks books={wishList} navigation={navigation} />
+        null
       ) : (
         <View style={styles.emptyWishListMessage}>
           <Text style={styles.emptyWishListMessageText}>
