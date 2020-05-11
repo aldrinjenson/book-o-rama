@@ -10,7 +10,9 @@ const WishListContextProvider = (props) => {
   };
 
   const removeBookFromWishList = (book) => {
-    setWishList((prevState) => prevState.filter((item) => item.id != book.id));
+    setWishList((prevState) =>
+      prevState.filter((item) => item.isbn10 !== book.isbn10)
+    );
   };
 
   return (

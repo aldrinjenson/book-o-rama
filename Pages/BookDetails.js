@@ -44,7 +44,7 @@ const BookDetails = ({ route }) => {
       });
       setIsLoaded(true);
     } catch (error) {
-      console.log("Error " + error);
+      console.log("Error found: " + error);
       return <Text>Error</Text>;
     }
   };
@@ -70,9 +70,12 @@ const BookDetails = ({ route }) => {
       (elem) => JSON.stringify(book) === JSON.stringify(elem)
     );
 
-    if (contains || bookAdded) setAlreadyAdded(true);
+    if (contains || bookAdded) {
+      setAlreadyAdded(true)
+      // return;
+    }
+
     else {
-      book.id = wishList.length + 1;
       addNewBookToWishList(book);
       setBookAdded(true);
       setSnackBarVisible(true);
@@ -143,7 +146,8 @@ const BookDetails = ({ route }) => {
           </ScrollView>
           <FAB
             style={styles.fab}
-            icon={alreadyAdded ? "delete" : "bookmark"}
+            icon="bookmark"
+            // icon={alreadyAdded ? "delete" : "bookmark"}
             onPress={handleFABClick}
           />
           <Snackbar

@@ -15,16 +15,15 @@ const WishList = ({ navigation }) => {
         <View style={{ marginBottom: 40 }}>
           <ScrollView>
             {wishList.map((book) => (
-              <View>
-                <BookListCard
-                  imageUrl={book.imageUrl}
-                  name={book.name}
-                  author={book.authors[0]}
-                  book={book}
-                  navigation={navigation}
-                  deleteBook={removeBookFromWishList}
-                />
-              </View>
+              <BookListCard
+                key={book.isbn10}
+                imageUrl={book.imageUrl}
+                name={book.name}
+                author={book.authors[0]}
+                book={book}
+                navigation={navigation}
+                deleteBook={removeBookFromWishList}
+              />
             ))}
           </ScrollView>
         </View>

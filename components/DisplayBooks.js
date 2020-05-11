@@ -57,11 +57,15 @@ const DisplayBooks = ({ books, navigation }) => {
             <TouchableOpacity
               onPress={() => handleClick({ ...item, imageSource, authors })}
             >
-              <BookListCard
-                imageUrl={imageSource}
-                name={item.volumeInfo.title}
-                author={authors[0]}
-              />
+              <View style={styles.horizonatalCard}>
+                <Image style={styles.bookImage} source={imageSource} />
+                <View style={styles.textContent}>
+                  <Text style={globalStyles.title}>
+                    {item.volumeInfo.title}
+                  </Text>
+                  <Text>{authors[0]}</Text>
+                </View>
+              </View>
             </TouchableOpacity>
           );
         }}
@@ -75,5 +79,22 @@ export default DisplayBooks;
 const styles = StyleSheet.create({
   bookList: {
     marginBottom: 95,
+  },
+  horizonatalCard: {
+    borderWidth: 1,
+    flexDirection: "row",
+    borderColor: "#aaa",
+    alignItems: "center",
+    padding: 3,
+    margin: 6,
+  },
+  bookImage: {
+    height: 95,
+    width: 80,
+    margin: 4,
+    marginRight: 16,
+  },
+  textContent: {
+    flex: 1,
   },
 });
