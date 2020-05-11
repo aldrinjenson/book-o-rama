@@ -8,7 +8,7 @@ import {
   ScrollView,
   Linking,
 } from "react-native";
-import { ActivityIndicator, FAB } from "react-native-paper";
+import { ActivityIndicator, FAB, Snackbar } from "react-native-paper";
 import axios from "axios";
 import { WishListContext } from "../contexts/wishListContext";
 
@@ -20,7 +20,7 @@ const BookDetails = ({ route }) => {
   // if(isFromWishList)
   //   setBook(route.params)  // as now route.params = book
   // No need to enter the above, as the logic is already appled in the else part of the useeffect hook
-  const { addNewBookToWishList } = useContext(WishListContext);
+  const { wishList, addNewBookToWishList } = useContext(WishListContext);
 
   const fetchData = async () => {
     const { isbn13, imageUrl, buyLink } = route.params;
@@ -61,11 +61,22 @@ const BookDetails = ({ route }) => {
     // }
   }, []);
 
-  const [fabClicked, setFabClicked] = useState(false);
+  // const { wishList } = useContext(WishListContext);
+  const [bookAdded, setBookAdded] = useState(false);
+  const [snackBarVisible, setSnackBarVisible] = useState(false);
+  const [alreadyAdded, setAlreadyAdded] = useState(false);
   const handleFABClick = () => {
-    if (fabClicked) return null;
-    addNewBookToWishList(book);
-    setFabClicked(true);
+    var contains = wishList.some(
+      (elem) => JSON.stringify(book) === JSON.stringify(elem)
+    );
+
+    if (contains || bookAdded) setAlreadyAdded(true);
+    else {
+      book.id = wishList.length + 1;
+      addNewBookToWishList(book);
+      setBookAdded(true);
+      setSnackBarVisible(true);
+    }
   };
 
   return (
@@ -130,7 +141,27 @@ const BookDetails = ({ route }) => {
               </View>
             </View>
           </ScrollView>
-          <FAB style={styles.fab} icon="bookmark" onPress={handleFABClick} />
+          <FAB
+            style={styles.fab}
+            icon={alreadyAdded ? "delete" : "bookmark"}
+            onPress={handleFABClick}
+          />
+          <Snackbar
+            style={styles.snackBar}
+            visible={snackBarVisible}
+            duration={2500}
+            onDismiss={() => setSnackBarVisible(false)}
+          >
+            Book added to Wish List
+          </Snackbar>
+          <Snackbar
+            style={styles.snackBar}
+            visible={alreadyAdded}
+            duration={2500}
+            onDismiss={() => setAlreadyAdded(false)}
+          >
+            Book already added to wishList
+          </Snackbar>
         </View>
       ) : (
         <View style={{ justifyContent: "center", alignItems: "center" }}>
@@ -201,5 +232,8 @@ const styles = StyleSheet.create({
     paddingTop: 6,
     paddingHorizontal: 4,
     marginBottom: 80,
+  },
+  snackBar: {
+    backgroundColor: "grey",
   },
 });

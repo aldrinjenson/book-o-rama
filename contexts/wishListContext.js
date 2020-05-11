@@ -6,11 +6,17 @@ const WishListContextProvider = (props) => {
   const [wishList, setWishList] = useState([]);
 
   const addNewBookToWishList = (book) => {
-    book.isFromWishList = true;
     setWishList((prevState) => [...prevState, book]);
   };
+
+  const removeBookFromWishList = (book) => {
+    setWishList((prevState) => prevState.filter((item) => item.id != book.id));
+  };
+
   return (
-    <WishListContext.Provider value={{ wishList, addNewBookToWishList }}>
+    <WishListContext.Provider
+      value={{ wishList, addNewBookToWishList, removeBookFromWishList }}
+    >
       {props.children}
     </WishListContext.Provider>
   );
