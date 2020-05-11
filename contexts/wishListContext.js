@@ -6,6 +6,7 @@ const WishListContextProvider = (props) => {
   const [wishList, setWishList] = useState([]);
 
   const addNewBookToWishList = (book) => {
+    book.isFromWishList = true;
     setWishList((prevState) => [...prevState, book]);
   };
   return (

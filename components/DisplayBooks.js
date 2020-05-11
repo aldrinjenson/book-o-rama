@@ -8,15 +8,22 @@ import {
   Image,
 } from "react-native";
 import { globalStyles } from "../global/globalStyles";
+import BookListCard from "./BookListCard";
 
 const DisplayBooks = ({ books, navigation }) => {
-  
-  if (!books) return (<View style={{justifyContent:'center', alignItems:'center', marginTop:200}} >
-    <Text>Sorry, No such book exists in our database!!</Text>
-    <Text>Please check your search query</Text>
-  </View>);
-
-  console.log(books)
+  if (!books)
+    return (
+      <View
+        style={{
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: 200,
+        }}
+      >
+        <Text>Sorry, No such book exists in our database!!</Text>
+        <Text>Please check your search query</Text>
+      </View>
+    );
 
   const handleClick = (item) => {
     let book = {
@@ -36,7 +43,6 @@ const DisplayBooks = ({ books, navigation }) => {
       bookId: item.id,
     };
     navigation.navigate("BookDetails", book);
-    // navigation.navigate("BookDetails", item);
   };
   return (
     <View style={styles.bookList}>
@@ -46,19 +52,16 @@ const DisplayBooks = ({ books, navigation }) => {
           let imageSource = item.volumeInfo.imageLinks
             ? { uri: `${item.volumeInfo.imageLinks.thumbnail}` }
             : require("../assets/no_preview_image.png");
-          let authors = item.volumeInfo.authors
-            ? item.volumeInfo.authors
-            : [];
+          let authors = item.volumeInfo.authors ? item.volumeInfo.authors : [];
           return (
             <TouchableOpacity
-              style={styles.horizonatalCard}
               onPress={() => handleClick({ ...item, imageSource, authors })}
             >
-              <Image style={styles.bookImage} source={imageSource} />
-              <View style={styles.textContent}>
-                <Text style={globalStyles.title}>{item.volumeInfo.title}</Text>
-                <Text>{authors[0]}</Text>
-              </View>
+              <BookListCard
+                imageUrl={imageSource}
+                name={item.volumeInfo.title}
+                author={authors[0]}
+              />
             </TouchableOpacity>
           );
         }}
@@ -70,26 +73,7 @@ const DisplayBooks = ({ books, navigation }) => {
 export default DisplayBooks;
 
 const styles = StyleSheet.create({
-  horizonatalCard: {
-    flexDirection: "row",
-    padding: 3,
-    margin: 6,
-    borderWidth: 1,
-    borderColor: "#aaa",
-    alignItems: "center",
-  },
-  bookImage: {
-    height: 95,
-    width: 80,
-    margin: 4,
-    marginRight: 16,
-  },
-  textContent: {
-    flex: 1,
-    flexDirection: "column",
-    alignSelf: "flex-start",
-  },
   bookList: {
-    marginBottom: 90,
+    marginBottom: 95,
   },
 });

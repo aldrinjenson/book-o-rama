@@ -13,10 +13,13 @@ import axios from "axios";
 import { WishListContext } from "../contexts/wishListContext";
 
 const BookDetails = ({ route }) => {
-  const { isFromNY } = route.params;
+  const { isFromNY, isFromWishList } = route.params;
   const [isLoaded, setIsLoaded] = useState(false);
 
   const [book, setBook] = useState({});
+  // if(isFromWishList)
+  //   setBook(route.params)  // as now route.params = book
+  // No need to enter the above, as the logic is already appled in the else part of the useeffect hook
   const { addNewBookToWishList } = useContext(WishListContext);
 
   const fetchData = async () => {
@@ -62,7 +65,7 @@ const BookDetails = ({ route }) => {
   const handleFABClick = () => {
     if (fabClicked) return null;
     addNewBookToWishList(book);
-    setFabClicked(true)
+    setFabClicked(true);
   };
 
   return (
