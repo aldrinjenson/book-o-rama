@@ -40,7 +40,7 @@ const DisplayBooks = ({ books, navigation }) => {
       buyLink:
         "https://www.amazon.in/dp/" +
         item.volumeInfo.industryIdentifiers[0].identifier,
-      bookId: item.id,
+      isbn10: item.volumeInfo.industryIdentifiers[0].identifier,
     };
     navigation.navigate("BookDetails", book);
   };

@@ -13,14 +13,12 @@ import axios from "axios";
 import { WishListContext } from "../contexts/wishListContext";
 
 const BookDetails = ({ route }) => {
-  const { isFromNY, isFromWishList } = route.params;
+  const { isFromNY } = route.params;
   const [isLoaded, setIsLoaded] = useState(false);
 
   const [book, setBook] = useState({});
-  // if(isFromWishList)
-  //   setBook(route.params)  // as now route.params = book
-  // No need to enter the above, as the logic is already appled in the else part of the useeffect hook
   const { wishList, addNewBookToWishList } = useContext(WishListContext);
+  const [bookDetailsNotFound, setBookDetailsNotFound] = useState(false);
 
   const fetchData = async () => {
     const { isbn13, imageUrl, buyLink } = route.params;
@@ -45,7 +43,7 @@ const BookDetails = ({ route }) => {
       setIsLoaded(true);
     } catch (error) {
       console.log("Error found: " + error);
-      return <Text>Error</Text>;
+      setBookDetailsNotFound(true);
     }
   };
 
@@ -71,11 +69,9 @@ const BookDetails = ({ route }) => {
     );
 
     if (contains || bookAdded) {
-      setAlreadyAdded(true)
+      setAlreadyAdded(true);
       // return;
-    }
-
-    else {
+    } else {
       addNewBookToWishList(book);
       setBookAdded(true);
       setSnackBarVisible(true);
@@ -107,38 +103,47 @@ const BookDetails = ({ route }) => {
                       <Text style={styles.subKey}>Not rated</Text>
                     )}
                   </View>
-                  <Text style={styles.subKey}>
-                    Publisher:{" "}
-                    <Text style={styles.subValue}>{book.publisher}</Text>
-                  </Text>
+                  {book.publisher ? (
+                    <Text style={styles.subKey}>
+                      Publisher:{" "}
+                      <Text style={styles.subValue}>{book.publisher}</Text>
+                    </Text>
+                  ) : null}
                   <Button
+                    style={styles.button}
                     title="More Details"
                     onPress={() => Linking.openURL(book.previewLink)}
                   />
                 </View>
               </View>
               <View style={styles.middle}>
-                <View>
+                <Text style={styles.subKey}>
+                  Published Date:
+                  <Text style={styles.subValue}>{book.publishedDate}</Text>
+                </Text>
+                {book.categories && (
                   <Text style={styles.subKey}>
-                    Published Date: {book.publishedDate}
+                    Categories:{" "}
+                    {book.categories.map((category, index) => (
+                      <Text key={index} style={styles.subValue}>
+                        {" "}
+                        {category}
+                      </Text>
+                    ))}
                   </Text>
-                  {book.categories && (
-                    <Text style={styles.subKey}>
-                      Categories: {book.categories.map((category) => category)}
-                    </Text>
-                  )}
-                  <Button
-                    title="Buy Now"
-                    onPress={() => Linking.openURL(book.buyLink)}
-                  />
-                </View>
+                )}
+                <Button
+                  title="Buy Now"
+                  onPress={() => Linking.openURL(book.buyLink)}
+                  style={styles.button}
+                />
 
                 <Text style={styles.subKey}>
                   Description:
                   {book.description ? (
                     <Text style={styles.subValue}>{book.description}</Text>
                   ) : (
-                    <Text> Not available</Text>
+                    <Text style={styles.subValue}> Not available</Text>
                   )}
                 </Text>
               </View>
@@ -147,7 +152,7 @@ const BookDetails = ({ route }) => {
           <FAB
             style={styles.fab}
             icon="bookmark"
-            // icon={alreadyAdded ? "delete" : "bookmark"}
+            // color={}
             onPress={handleFABClick}
           />
           <Snackbar
@@ -168,9 +173,15 @@ const BookDetails = ({ route }) => {
           </Snackbar>
         </View>
       ) : (
-        <View style={{ justifyContent: "center", alignItems: "center" }}>
+        <View style={styles.loading}>
           <ActivityIndicator size="large" color="0000ff" />
           <Text>Loading...</Text>
+          {bookDetailsNotFound && (
+            <Text style={{ marginTop: 50 }}>
+              OOPSIE..This book seems to have been moved off the database for
+              some reason; Plase try searching for this in the searchBar :)
+            </Text>
+          )}
         </View>
       )}
     </View>
@@ -196,6 +207,7 @@ const styles = StyleSheet.create({
     margin: 20,
     right: 0,
     bottom: 0,
+    backgroundColor: "skyblue",
   },
   title: {
     fontWeight: "bold",
@@ -229,15 +241,27 @@ const styles = StyleSheet.create({
     letterSpacing: 0.6,
     lineHeight: 22,
     paddingTop: 5,
+    color: "#555",
+    paddingLeft: 4,
   },
   middle: {
     flex: 1,
-    justifyContent: "space-between",
+    // borderWidth:1,
+    // justifyContent: "space-between",
     paddingTop: 6,
     paddingHorizontal: 4,
     marginBottom: 80,
   },
   snackBar: {
-    backgroundColor: "grey",
+    backgroundColor: "#C5C5DB",
+    // backgroundColor: "#99f",
+    position: "absolute",
+    bottom: 10,
+  },
+  loading: {
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginHorizontal: 20,
+    paddingVertical: 80,
   },
 });

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, TextInput } from "react-native";
+import { StyleSheet, View, TextInput, Keyboard } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 
 const SearchBar = ({ setValue, placeholder }) => {
@@ -7,17 +7,17 @@ const SearchBar = ({ setValue, placeholder }) => {
 
   const handleSubmit = () => {
     setValue(query);
+    Keyboard.dismiss()
   };
 
   return (
     <View style={styles.searchBar}>
       <TextInput
-        // style={styles.TextInput}
         placeholder={placeholder}
         value={query}
         onChangeText={(value) => setQuery(value)}
       />
-      <MaterialIcons name="search" size={25} onPress={handleSubmit} />
+      <MaterialIcons name="search" size={25} onPress={handleSubmit} style={styles.icon} />
     </View>
   );
 };
@@ -36,4 +36,9 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     alignSelf: "center",
   },
+  icon:{
+    paddingHorizontal: 18,
+    paddingVertical: 4,
+    paddingRight:8
+  }
 });

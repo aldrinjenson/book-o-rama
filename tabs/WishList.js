@@ -1,9 +1,8 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { StyleSheet, Text, View, FlatList, ScrollView } from "react-native";
 import { globalStyles } from "../global/globalStyles";
 import { Title } from "react-native-paper";
 import { WishListContext } from "../contexts/wishListContext";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import BookListCard from "../components/BookListCard";
 
 const WishList = ({ navigation }) => {
