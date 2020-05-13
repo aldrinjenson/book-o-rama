@@ -3,6 +3,10 @@ import { NavigationContainer } from "@react-navigation/native";
 import { RootDrawerNavigator } from "./routes/RootDrawerNavigator";
 import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
 import WishListContextProvider from "./contexts/wishListContext";
+// import * as firebase from 'firebase'
+// import firebaseConfig from "./config/firebaseConfig";
+
+// firebase.initializeApp(firebaseConfig)
 
 const theme = {
   ...DefaultTheme,

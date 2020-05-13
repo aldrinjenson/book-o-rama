@@ -3,12 +3,10 @@ import {
   StyleSheet,
   View,
   FlatList,
-  Button,
   ActivityIndicator,
 } from "react-native";
 import { globalStyles } from "../global/globalStyles";
 import BookCollection from "../components/BookCollection";
-import { collections } from "../data/CollectionList";
 import axios from "axios";
 
 const HomeTab = ({ navigation }) => {

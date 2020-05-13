@@ -16,7 +16,7 @@ export default CustomButton;
 const styles = StyleSheet.create({
   button: {
     margin: 6,
-    backgroundColor: "#ccc",
+    backgroundColor: "violet",
     borderRadius: 8,
     width: "65%",
     padding: 8,
