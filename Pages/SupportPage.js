@@ -6,6 +6,7 @@ import {
   Image,
   Dimensions,
   ScrollView,
+  ImageBackground
 } from "react-native";
 import { globalStyles } from "../global/globalStyles";
 import { Paragraph } from "react-native-paper";
@@ -13,7 +14,11 @@ import CustomButton from "../components/CustomButton";
 
 const SupportPage = () => {
   return (
-    <View style={globalStyles.container}>
+    // <View style={globalStyles.container}>
+    <ImageBackground
+      source={require("../assets/bg.png")}
+      style={globalStyles.container}
+    >
       <ScrollView>
         <View style={styles.about}>
           <Paragraph style={styles.Paragraph}>
@@ -23,10 +28,10 @@ const SupportPage = () => {
           </Paragraph>
           <Paragraph style={styles.Paragraph}>
             This app is built from the simple reason that most apps with similar
-            functionality run with ads and though necessary in some
-            ways, ads are always a hinderance to plesant user experience. Hence
-            the developer has ensured that there will be no ads in this
-            app and its future updates
+            functionality run with ads and though necessary in some ways, ads
+            are always a hinderance to plesant user experience. Hence the
+            developer has ensured that there will be no ads in this app and its
+            future updates
           </Paragraph>
           <Paragraph style={styles.Paragraph}>
             What you are holding now is the end product of several sleepless
@@ -45,7 +50,8 @@ const SupportPage = () => {
           </Text>
         </View>
       </ScrollView>
-    </View>
+    {/* </View> */}
+    </ImageBackground>
   );
 };
 
@@ -57,11 +63,11 @@ const styles = StyleSheet.create({
     // borderWidth: 1,
     // height: "100%",
     height: Dimensions.get("screen").height - 150,
-    justifyContent:'space-between'
+    justifyContent:'space-between',
   },
   Paragraph: {
     marginBottom: 12,
-    paddingTop: 7,
+    paddingTop: 7
   },
   cheers: {
     alignSelf: "center",

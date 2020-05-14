@@ -8,7 +8,12 @@ import {
   ScrollView,
   Linking,
 } from "react-native";
-import { ActivityIndicator, FAB, Snackbar } from "react-native-paper";
+import {
+  ActivityIndicator,
+  FAB,
+  Snackbar,
+  Paragraph,
+} from "react-native-paper";
 import axios from "axios";
 import { WishListContext } from "../contexts/wishListContext";
 import { bookSearchBaseUrl } from "../config/apiKey";
@@ -37,6 +42,7 @@ const BookDetails = ({ route }) => {
         authors: result.data.items[0].volumeInfo.authors,
         categories: result.data.items[0].volumeInfo.categories,
         previewLink: result.data.items[0].volumeInfo.previewLink,
+        pageCount: result.data.items[0].volumeInfo.pageCount,
         isbn10:
           result.data.items[0].volumeInfo.industryIdentifiers[0].identifier,
       });
@@ -134,6 +140,14 @@ const BookDetails = ({ route }) => {
                     ))}
                   </Text>
                 )}
+
+                {book.pageCount && (
+                  <Text style={styles.subKey}>
+                    Page Count:{" "}
+                    <Text style={styles.subValue}>{book.pageCount}</Text>
+                  </Text>
+                )}
+
                 <Button
                   title="Buy Now"
                   onPress={() => Linking.openURL(book.buyLink)}
@@ -181,10 +195,16 @@ const BookDetails = ({ route }) => {
           <ActivityIndicator size="large" color="0000ff" />
           <Text>Loading...</Text>
           {bookDetailsNotFound && (
-            <Text style={{ marginTop: 50 }}>
-              OOPSIE..This book seems to have been moved off the database for
-              some reason; Plase try searching for this in the searchBar :)
-            </Text>
+            <View>
+              <Paragraph style={{ marginTop: 50 }}>
+                OOPSIE..This book seems to have been moved off the database for
+                some reason.
+              </Paragraph>
+              <Paragraph>
+                Plase try again after some time or maybe try searching for this
+                in the searchBar :)
+              </Paragraph>
+            </View>
           )}
         </View>
       )}
@@ -202,7 +222,7 @@ const styles = StyleSheet.create({
   },
 
   BookDetailsCard: {
-    flex: 1,
+    // flex: 1,
     marginHorizontal: 15,
     elevation: 10,
   },
@@ -238,7 +258,7 @@ const styles = StyleSheet.create({
   },
   subKey: {
     fontWeight: "bold",
-    paddingTop: 5,
+    paddingVertical: 5,
   },
   subValue: {
     fontWeight: "normal",
@@ -249,10 +269,11 @@ const styles = StyleSheet.create({
     paddingLeft: 4,
   },
   middle: {
-    flex: 1,
+    // flex: 1,
     paddingTop: 6,
     paddingHorizontal: 4,
     marginBottom: 80,
+    justifyContent: "space-between",
   },
   snackBar: {
     backgroundColor: "#2196F3",

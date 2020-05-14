@@ -37,6 +37,7 @@ const DisplayBooks = ({ books, navigation }) => {
       authors: item.authors,
       categories: item.volumeInfo.categories,
       previewLink: item.volumeInfo.previewLink,
+      pageCount: item.volumeInfo.pageCount,
       buyLink:
         "https://www.amazon.in/dp/" +
         item.volumeInfo.industryIdentifiers[0].identifier,

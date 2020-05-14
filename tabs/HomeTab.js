@@ -26,7 +26,7 @@ const HomeTab = ({ navigation }) => {
         if (error.message === "Network Error") setNetWorkError(true);
       }
     };
-    // fetchData();
+    fetchData();
   }, []);
 
   return (
@@ -42,12 +42,14 @@ const HomeTab = ({ navigation }) => {
         </View>
       ) : null}
       {!topBooksList.length ? (
-        <View></View>
-        <ActivityIndicator
-          size="large"
-          color="0000ff"
-          style={{ alignItems: "center", flex: 1 }}
-        />
+        <View style={{ flex: 1, alignItems:'center', justifyContent:'center' }}>
+          <ActivityIndicator
+            size="large"
+            color="0000ff"
+            style={{  marginBottom: 30}}
+          />
+          <Text style={{marginTop: 20}} >Loading New York Times' best sellers list... </Text>
+        </View>
       ) : (
         <FlatList
           keyExtractor={(item, index) => item.list_id.toString()}

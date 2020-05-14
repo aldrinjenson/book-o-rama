@@ -13,11 +13,13 @@ const HomeStack = () => {
       <Stack.Screen
         name="HomeTabStack"
         component={HomeTabStack}
-        options={({navigation}) => ({
-          headerTitle: () => <Header navigation={navigation} />,
+        options={({ navigation }) => ({
+          headerTitle: () => (
+            <Header navigation={navigation} title="Book-o-Rama" />
+          ),
         })}
       />
-      <Stack.Screen name='BookDetails' component={BookDetails} />
+      <Stack.Screen name="BookDetails" component={BookDetails} />
     </Stack.Navigator>
   );
 };

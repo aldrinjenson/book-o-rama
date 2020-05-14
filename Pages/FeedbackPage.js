@@ -34,8 +34,8 @@ const FeedbackPage = () => {
   return (
     <View style={globalStyles.container}>
       <View style={styles.textContent}>
-        <Paragraph>Found a bug or an error?</Paragraph>
-        <Paragraph>Have an idea for a new cool feature in mind?</Paragraph>
+        <Paragraph>Found a bug or met with an error ?</Paragraph>
+        <Paragraph>Have an idea for a cool new feature ?</Paragraph>
         <Paragraph>Just drop in your contact details</Paragraph>
         <Paragraph>&</Paragraph>
         <Paragraph> send a feedback to the developer!!</Paragraph>

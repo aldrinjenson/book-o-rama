@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, ActivityIndicator } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ActivityIndicator,
+  ImageBackground,
+} from "react-native";
 import { globalStyles } from "../global/globalStyles";
 import SearchBar from "../components/SearchBar";
 import DisplayBooks from "../components/DisplayBooks";
