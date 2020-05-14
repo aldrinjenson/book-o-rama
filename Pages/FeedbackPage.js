@@ -4,7 +4,6 @@ import {
   View,
   StyleSheet,
   TextInput,
-  TouchableOpacity,
   Alert,
   Button,
 } from "react-native";
@@ -31,7 +30,6 @@ const handleSubmit = (values) => {
     feedback: values.feedback,
   });
   Alert.alert("Your feedback has been sent. Thank you :)");
-  console.log("Submitted");
 };
 
 const feedbackSchema = yup.object({
@@ -47,8 +45,6 @@ const FeedbackPage = () => {
         initialValues={{ name: "", email: "", feedback: "" }}
         validationSchema={feedbackSchema}
         onSubmit={(values, actions) => {
-          console.log(values);
-          Alert.alert('Submitted.')
           handleSubmit(values);
           actions.resetForm();
         }}

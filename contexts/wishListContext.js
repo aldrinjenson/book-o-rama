@@ -1,19 +1,50 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
+import { AsyncStorage } from "react-native";
+
+const saveToAsyncStorage = async (wishList) => {
+  try {
+    let stringedWishList = JSON.stringify(wishList);
+    await AsyncStorage.setItem("savedWishList", stringedWishList);
+    console.log("Successfully saved to local storage");
+  } catch (error) {
+    console.log("Error in storing to local storage" + error);
+  }
+  return;
+};
 
 export const WishListContext = createContext();
 
 const WishListContextProvider = (props) => {
   const [wishList, setWishList] = useState([]);
 
+  const getFromAsyncStorage = async () => {
+    try {
+      const stringedWishListFromStorage = await AsyncStorage.getItem(
+        "savedWishList"
+      );
+      let parsedArray = JSON.parse(stringedWishListFromStorage);
+      console.log(parsedArray);
+      setWishList(parsedArray);
+    } catch (error) {
+      console.log("Error in retrieving from storage" + error);
+    }
+  };
+
   const addNewBookToWishList = (book) => {
-    setWishList((prevState) => [...prevState, book]);
+    const newWishList = [...wishList,book]
+    saveToAsyncStorage(newWishList);
+    setWishList(newWishList);
   };
 
   const removeBookFromWishList = (book) => {
-    setWishList((prevState) =>
-      prevState.filter((item) => item.isbn10 !== book.isbn10)
-    );
+    const newWishList = wishList.filter((item) => item.isbn10 !== book.isbn10);
+    saveToAsyncStorage(newWishList)
+    setWishList(newWishList);
   };
+
+  useEffect(() => {
+    getFromAsyncStorage();
+  },[]);
 
   return (
     <WishListContext.Provider

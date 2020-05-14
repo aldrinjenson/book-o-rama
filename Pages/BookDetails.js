@@ -68,7 +68,7 @@ const BookDetails = ({ route }) => {
       (elem) => JSON.stringify(book) === JSON.stringify(elem)
     );
 
-    if (contains || bookAdded) {
+    if (contains || bookAdded ) {
       setAlreadyAdded(true);
       // return;
     } else {
@@ -207,7 +207,7 @@ const styles = StyleSheet.create({
     margin: 20,
     right: 0,
     bottom: 0,
-    backgroundColor: "skyblue",
+    backgroundColor: "#3385FF",
   },
   title: {
     fontWeight: "bold",
@@ -253,10 +253,11 @@ const styles = StyleSheet.create({
     marginBottom: 80,
   },
   snackBar: {
-    backgroundColor: "#C5C5DB",
+    // backgroundColor: "#C5C5DB",
+    backgroundColor: "#3385dd",
     // backgroundColor: "#99f",
     position: "absolute",
-    bottom: 10,
+    bottom: 20,
   },
   loading: {
     justifyContent: "space-between",

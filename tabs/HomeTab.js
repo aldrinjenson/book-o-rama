@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from "react";
-import {
-  StyleSheet,
-  View,
-  FlatList,
-  ActivityIndicator,
-} from "react-native";
+import React, { useState, useEffect, useContext } from "react";
+import { StyleSheet, View, FlatList, ActivityIndicator } from "react-native";
 import { globalStyles } from "../global/globalStyles";
 import BookCollection from "../components/BookCollection";
 import axios from "axios";
+// import { WishListContext } from "../contexts/wishListContext";
 
 const HomeTab = ({ navigation }) => {
+  // const { getFromAsyncStorage } = useContext(WishListContext); // for getting stored wishList from async storage
+
   const [topBooksList, setTopBooksList] = useState([]);
 
   useEffect(() => {
@@ -26,6 +24,7 @@ const HomeTab = ({ navigation }) => {
       }
     };
     fetchData();
+    // getFromAsyncStorage();
   }, []);
 
   return (

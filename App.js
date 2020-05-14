@@ -1,13 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { RootDrawerNavigator } from "./routes/RootDrawerNavigator";
 import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
-import WishListContextProvider from "./contexts/wishListContext";
-// import * as firebase from 'firebase'
-// import firebaseConfig from "./config/firebaseConfig";
-
-// firebase.initializeApp(firebaseConfig)
-
+import WishListContextProvider, { WishListContext } from "./contexts/wishListContext";
 const theme = {
   ...DefaultTheme,
   // dark:true,
