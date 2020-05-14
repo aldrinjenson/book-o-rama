@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Text,
-  View,
-  StyleSheet,
-  TextInput,
-  Alert,
-  Button,
-} from "react-native";
+import { Text, View, StyleSheet, TextInput, Alert } from "react-native";
 import { globalStyles } from "../global/globalStyles";
 import { Formik } from "formik";
 import * as yup from "yup";
@@ -15,8 +8,7 @@ import * as firebase from "firebase";
 import "firebase/firestore";
 import firebaseConfig from "../config/firebaseConfig";
 import CustomButton from "../components/CustomButton";
-
-// firebase.initializeApp(firebaseConfig)
+import { Paragraph } from "react-native-paper";
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
@@ -41,6 +33,14 @@ const feedbackSchema = yup.object({
 const FeedbackPage = () => {
   return (
     <View style={globalStyles.container}>
+      <View style={styles.textContent}>
+        <Paragraph>Found a bug or an error?</Paragraph>
+        <Paragraph>Have an idea for a new cool feature in mind?</Paragraph>
+        <Paragraph>Just drop in your contact details</Paragraph>
+        <Paragraph>&</Paragraph>
+        <Paragraph> send a feedback to the developer!!</Paragraph>
+      </View>
+
       <Formik
         initialValues={{ name: "", email: "", feedback: "" }}
         validationSchema={feedbackSchema}
@@ -102,7 +102,13 @@ const styles = StyleSheet.create({
     borderRadius: 6,
   },
   errorText: {
-    color: "purple",
+    color: "#2196F3",
     marginBottom: 10,
+  },
+  textContent: {
+    // justifyContent:'center',
+    alignItems: "center",
+    marginBottom: 40,
+    paddingVertical: 10,
   },
 });

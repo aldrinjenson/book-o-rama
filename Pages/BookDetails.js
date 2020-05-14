@@ -95,7 +95,9 @@ const BookDetails = ({ route }) => {
                   <View>
                     {book.authors &&
                       book.authors.map((author) => (
-                        <Text key={author} style={styles.author} >{author}</Text>
+                        <Text key={author} style={styles.author}>
+                          {author}
+                        </Text>
                       ))}
                     {book.rating ? (
                       <Text style={styles.subKey}>Rating: {book.rating}</Text>
@@ -118,7 +120,7 @@ const BookDetails = ({ route }) => {
               </View>
               <View style={styles.middle}>
                 <Text style={styles.subKey}>
-                  Published Date: {" "}
+                  Published Date:{" "}
                   <Text style={styles.subValue}>{book.publishedDate}</Text>
                 </Text>
                 {book.categories && (
@@ -141,7 +143,9 @@ const BookDetails = ({ route }) => {
                 <Text style={styles.subKey}>
                   Description:
                   {book.description ? (
-                    <Text style={styles.subValue}>{book.description}</Text>
+                    <Text style={styles.subValue}>
+                      {" " + book.description}
+                    </Text>
                   ) : (
                     <Text style={styles.subValue}> Not available</Text>
                   )}
@@ -261,9 +265,9 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     paddingVertical: 80,
   },
-  author:{
-    color: '#444',
-    fontWeight:'900',
-    marginBottom: 3
-  }
+  author: {
+    color: "#777",
+    fontWeight: "bold",
+    marginBottom: 3,
+  },
 });

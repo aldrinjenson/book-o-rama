@@ -9,7 +9,7 @@ const Drawer = createDrawerNavigator();
 
 export const RootDrawerNavigator = () => (
   <Drawer.Navigator>
-    <Drawer.Screen name="HomeStack" component={HomeStack} />
+    <Drawer.Screen name="Home" component={HomeStack} />
     <Drawer.Screen name="Settings " component={SettingsStack} />
     <Drawer.Screen name="Support Developer" component={SupportStack} />
     <Drawer.Screen name="Feedback" component={FeedbackStack} />

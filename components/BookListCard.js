@@ -3,7 +3,14 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import { globalStyles } from "../global/globalStyles";
 import { MaterialIcons } from "@expo/vector-icons";
 
-const BookListCard = ({ imageUrl, name, author, book, navigation,deleteBook }) => {
+const BookListCard = ({
+  imageUrl,
+  name,
+  author,
+  book,
+  navigation,
+  deleteBook,
+}) => {
   return (
     <View style={styles.horizonatalCard}>
       <View style={styles.content}>
@@ -47,21 +54,16 @@ const styles = StyleSheet.create({
   },
   TouchableOpacity: {
     flex: 1,
-    // borderWidth:1,
     flexDirection: "row",
   },
   content: {
     flexDirection: "row",
-    // borderWidth: 1,
     flex: 1,
   },
   textContent: {
     flex: 1,
-    //   flexDirection: "column",
-    //   alignSelf: "flex-start",
   },
   icon: {
     padding: 16,
-    // borderWidth: 1,
   },
 });
