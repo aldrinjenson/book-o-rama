@@ -23,28 +23,27 @@ const WishListContextProvider = (props) => {
         "savedWishList"
       );
       let parsedArray = JSON.parse(stringedWishListFromStorage);
-      console.log(parsedArray);
-      setWishList(parsedArray);
+      if (parsedArray) setWishList(parsedArray);
     } catch (error) {
       console.log("Error in retrieving from storage" + error);
     }
   };
 
   const addNewBookToWishList = (book) => {
-    const newWishList = [...wishList,book]
+    const newWishList = [...wishList, book];
     saveToAsyncStorage(newWishList);
     setWishList(newWishList);
   };
 
   const removeBookFromWishList = (book) => {
     const newWishList = wishList.filter((item) => item.isbn10 !== book.isbn10);
-    saveToAsyncStorage(newWishList)
+    saveToAsyncStorage(newWishList);
     setWishList(newWishList);
   };
 
   useEffect(() => {
     getFromAsyncStorage();
-  },[]);
+  }, []);
 
   return (
     <WishListContext.Provider

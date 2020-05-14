@@ -11,6 +11,7 @@ import {
 import { ActivityIndicator, FAB, Snackbar } from "react-native-paper";
 import axios from "axios";
 import { WishListContext } from "../contexts/wishListContext";
+import { bookSearchBaseUrl } from "../config/apiKey";
 
 const BookDetails = ({ route }) => {
   const { isFromNY } = route.params;
@@ -22,8 +23,7 @@ const BookDetails = ({ route }) => {
 
   const fetchData = async () => {
     const { isbn13, imageUrl, buyLink } = route.params;
-    const API_URL =
-      "https://www.googleapis.com/books/v1/volumes?q=isbn:" + isbn13;
+    const API_URL = bookSearchBaseUrl + isbn13;
     try {
       const result = await axios.get(API_URL);
       setBook({
@@ -68,7 +68,7 @@ const BookDetails = ({ route }) => {
       (elem) => JSON.stringify(book) === JSON.stringify(elem)
     );
 
-    if (contains || bookAdded ) {
+    if (contains || bookAdded) {
       setAlreadyAdded(true);
       // return;
     } else {
@@ -95,7 +95,7 @@ const BookDetails = ({ route }) => {
                   <View>
                     {book.authors &&
                       book.authors.map((author) => (
-                        <Text key={author}>{author}</Text>
+                        <Text key={author} style={styles.author} >{author}</Text>
                       ))}
                     {book.rating ? (
                       <Text style={styles.subKey}>Rating: {book.rating}</Text>
@@ -118,7 +118,7 @@ const BookDetails = ({ route }) => {
               </View>
               <View style={styles.middle}>
                 <Text style={styles.subKey}>
-                  Published Date:
+                  Published Date: {" "}
                   <Text style={styles.subValue}>{book.publishedDate}</Text>
                 </Text>
                 {book.categories && (
@@ -207,7 +207,7 @@ const styles = StyleSheet.create({
     margin: 20,
     right: 0,
     bottom: 0,
-    backgroundColor: "#3385FF",
+    backgroundColor: "#2196F3", // default colour of btn
   },
   title: {
     fontWeight: "bold",
@@ -246,16 +246,12 @@ const styles = StyleSheet.create({
   },
   middle: {
     flex: 1,
-    // borderWidth:1,
-    // justifyContent: "space-between",
     paddingTop: 6,
     paddingHorizontal: 4,
     marginBottom: 80,
   },
   snackBar: {
-    // backgroundColor: "#C5C5DB",
-    backgroundColor: "#3385dd",
-    // backgroundColor: "#99f",
+    backgroundColor: "#2196F3",
     position: "absolute",
     bottom: 20,
   },
@@ -265,4 +261,9 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     paddingVertical: 80,
   },
+  author:{
+    color: '#444',
+    fontWeight:'900',
+    marginBottom: 3
+  }
 });

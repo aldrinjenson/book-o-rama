@@ -1,26 +1,26 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text,View, TouchableOpacity } from "react-native";
 import { globalStyles } from "../global/globalStyles";
 
 const SettingsPage = () => {
   return (
-    <View style={globalStyles.container}>
-      <View style={styles.settingItem}>
+    <View style={styles.SettingsContainer}>
+      <TouchableOpacity style={styles.settingItem}>
         <Text style={styles.settingItemKey}>Dark Mode</Text>
         <Text style={styles.settingItemValue}>Coming Soon...</Text>
-      </View>
-      <View style={styles.settingItem}>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.settingItem}>
         <Text style={styles.settingItemKey}>
           Book Sources
         </Text>
         <Text style={styles.settingItemValue}>Coming Soon...</Text>
-      </View>
-      <View style={styles.settingItem}>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.settingItem}>
         <Text style={styles.settingItemKey}>
           Display No. of pages if available?
         </Text>
         <Text style={styles.settingItemValue}>Coming Soon...</Text>
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -28,11 +28,10 @@ const SettingsPage = () => {
 export default SettingsPage;
 
 const styles = StyleSheet.create({
-  settings: {
+  SettingsContainer: {
     flex: 1,
-    borderWidth: 1,
     borderColor: "black",
-    margin: 7,
+    margin: 10,
     padding: 5,
   },
   settingItem: {
@@ -40,8 +39,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     borderWidth: 1,
     borderColor: "#999",
-    marginTop: 9,
+    marginVertical: 10,
     padding: 8,
+    paddingTop: 10
   },
   settingItemKey: {
     flex: 1,

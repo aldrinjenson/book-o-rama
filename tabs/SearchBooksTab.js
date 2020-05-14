@@ -25,7 +25,7 @@ const SearchBooks = ({ navigation }) => {
 
   return (
     <View style={globalStyles.container}>
-      <Text>Search Popular books or authors</Text>
+      <Text>Search by Book name, Author or by ISBN</Text>
       <SearchBar
         setValue={bookQuery}
         placeholder="Try 'Harry Potter' or 'J.K.
