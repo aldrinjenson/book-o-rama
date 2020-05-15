@@ -16,7 +16,7 @@ import {
 } from "react-native-paper";
 import axios from "axios";
 import { WishListContext } from "../contexts/wishListContext";
-import { bookSearchBaseUrl } from "../config/apiKey";
+import { bookSearchByISBNBaseUrl, searchBookUrl } from "../config/apiKey";
 
 const BookDetails = ({ route }) => {
   const { isFromNY } = route.params;
@@ -25,10 +25,11 @@ const BookDetails = ({ route }) => {
   const [book, setBook] = useState({});
   const { wishList, addNewBookToWishList } = useContext(WishListContext);
   const [bookDetailsNotFound, setBookDetailsNotFound] = useState(false);
+  const [baseUrl, setBaseUrl] = useState(bookSearchByISBNBaseUrl);
 
   const fetchData = async () => {
     const { isbn13, imageUrl, buyLink } = route.params;
-    const API_URL = bookSearchBaseUrl + isbn13;
+    let API_URL = baseUrl + isbn13;
     try {
       const result = await axios.get(API_URL);
       setBook({
@@ -48,8 +49,9 @@ const BookDetails = ({ route }) => {
       });
       setIsLoaded(true);
     } catch (error) {
-      console.log("Error found: " + error);
+      setBaseUrl(searchBookUrl);
       setBookDetailsNotFound(true);
+      console.log("Error found: " + error);
     }
   };
 
@@ -63,7 +65,8 @@ const BookDetails = ({ route }) => {
     // return () => {
     //   cleanup
     // }
-  }, []);
+  }, [baseUrl]); // so that the whole component will rerender in case the url changes,
+  // i.e. when the book is not in the database and then another api call has to be made
 
   // const { wishList } = useContext(WishListContext);
   const [bookAdded, setBookAdded] = useState(false);
@@ -200,10 +203,7 @@ const BookDetails = ({ route }) => {
                 OOPSIE..This book seems to have been moved off the database for
                 some reason.
               </Paragraph>
-              <Paragraph>
-                Plase try again after some time or maybe try searching for this
-                in the searchBar :)
-              </Paragraph>
+              <Paragraph>Plase wait while we do a deep scan :)</Paragraph>
             </View>
           )}
         </View>

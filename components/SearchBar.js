@@ -8,7 +8,7 @@ const SearchBar = ({ setValue, placeholder }) => {
   const handleSubmit = () => {
     setValue(query);
     Keyboard.dismiss()
-  };
+};
 
   return (
     <View style={styles.searchBar}>
