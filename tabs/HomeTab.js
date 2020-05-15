@@ -14,6 +14,7 @@ import { query, baseUrl, apiKey } from "../config/apiKey";
 const HomeTab = ({ navigation }) => {
   const [topBooksList, setTopBooksList] = useState([]);
   const [netWorkError, setNetWorkError] = useState(false);
+  const [extraTraffic, setExtraTraffic] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,6 +25,7 @@ const HomeTab = ({ navigation }) => {
       } catch (error) {
         console.log("error in accessing," + error);
         if (error.message === "Network Error") setNetWorkError(true);
+        if (error.response.status == 401) setExtraTraffic(true); // in case apiKey expired status
       }
     };
     fetchData();
@@ -40,15 +42,30 @@ const HomeTab = ({ navigation }) => {
             Please check your internet connectivity!!
           </Text>
         </View>
+      ) : extraTraffic ? (
+        <View style={styles.errorMessage}>
+          <Text>Whew...</Text>
+          <Text style={{ marginTop: 4, paddingTop: 2, flexWrap: "nowrap" }}>
+            There seems to be some extra network traffic at this moment to the
+            database
+          </Text>
+          <Text style={{ marginTop: 4, paddingTop: 2 }}>
+            Please try again after some time
+          </Text>
+        </View>
       ) : null}
       {!topBooksList.length ? (
-        <View style={{ flex: 1, alignItems:'center', justifyContent:'center' }}>
+        <View
+          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+        >
           <ActivityIndicator
             size="large"
             color="0000ff"
-            style={{  marginBottom: 30}}
+            style={{ marginBottom: 30 }}
           />
-          <Text style={{marginTop: 20}} >Loading New York Times' best sellers list... </Text>
+          <Text style={{ marginTop: 20 }}>
+            Loading New York Times' best sellers collection...
+          </Text>
         </View>
       ) : (
         <FlatList
