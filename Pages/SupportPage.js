@@ -6,7 +6,6 @@ import {
   Image,
   Dimensions,
   ScrollView,
-  ImageBackground
 } from "react-native";
 import { globalStyles } from "../global/globalStyles";
 import { Paragraph } from "react-native-paper";
@@ -14,11 +13,7 @@ import CustomButton from "../components/CustomButton";
 
 const SupportPage = () => {
   return (
-    // <View style={globalStyles.container}>
-    <ImageBackground
-      source={require("../assets/bg.png")}
-      style={globalStyles.container}
-    >
+    <View style={globalStyles.container}>
       <ScrollView>
         <View style={styles.about}>
           <Paragraph style={styles.Paragraph}>
@@ -50,8 +45,7 @@ const SupportPage = () => {
           </Text>
         </View>
       </ScrollView>
-    {/* </View> */}
-    </ImageBackground>
+    </View>
   );
 };
 
@@ -63,19 +57,19 @@ const styles = StyleSheet.create({
     // borderWidth: 1,
     // height: "100%",
     height: Dimensions.get("screen").height - 150,
-    justifyContent:'space-between',
+    justifyContent: "space-between",
   },
   Paragraph: {
     marginBottom: 12,
-    paddingTop: 7
+    paddingTop: 7,
   },
   cheers: {
     alignSelf: "center",
     marginVertical: 16,
   },
-  footer:{
-    alignSelf:'center',
-    marginVertical:20,
-    paddingVertical: 20
-  }
+  footer: {
+    alignSelf: "center",
+    marginVertical: 20,
+    paddingVertical: 20,
+  },
 });

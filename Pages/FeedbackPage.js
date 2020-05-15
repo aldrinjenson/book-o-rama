@@ -96,7 +96,7 @@ export default FeedbackPage;
 const styles = StyleSheet.create({
   feedbackInput: {
     borderWidth: 1,
-    borderColor: "#ddd",
+    borderColor: "#aaa",
     padding: 10,
     fontSize: 18,
     borderRadius: 6,

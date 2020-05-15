@@ -13,21 +13,21 @@ const HomeTabStack = () => {
     // initialRouteName='SearchBooks'
     >
       <Tab.Screen
-        name="HomeTab"
+        name="Best Sellers"
         component={HomeTab}
         options={{
           tabBarIcon: () => <MaterialIcons name="home" size={23} />,
         }}
       />
       <Tab.Screen
-        name="SearchBooks"
+        name="Search Books"
         component={SearchBooks}
         options={{
           tabBarIcon: () => <MaterialIcons name="search" size={23} />,
         }}
       />
       <Tab.Screen
-        name="WishList"
+        name="Wish List"
         component={WishList}
         options={{
           tabBarIcon: () => <MaterialIcons name="bookmark" size={23} />,
