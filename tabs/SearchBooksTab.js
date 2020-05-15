@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import {
-  StyleSheet,
   Text,
   View,
   ActivityIndicator,
-  ImageBackground,
 } from "react-native";
 import { globalStyles } from "../global/globalStyles";
 import SearchBar from "../components/SearchBar";
@@ -50,5 +48,3 @@ const SearchBooks = ({ navigation }) => {
 };
 
 export default SearchBooks;
-
-const styles = StyleSheet.create({});

@@ -1,5 +1,4 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import SettingsPage from "../Pages/SettingsPage";
 import Header from "../components/Header";
@@ -13,7 +12,9 @@ const SettingsStack = () => {
         name="Settings"
         component={SettingsPage}
         options={({ navigation }) => ({
-          headerTitle: () => <Header navigation={navigation} title='Settings' />,
+          headerTitle: () => (
+            <Header navigation={navigation} title="Settings" />
+          ),
         })}
       />
     </Stack.Navigator>
@@ -21,5 +22,3 @@ const SettingsStack = () => {
 };
 
 export default SettingsStack;
-
-const styles = StyleSheet.create({});

@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import HomeTabStack from "./HomeTabStack";
 import Header from "../../components/Header";
@@ -19,11 +19,9 @@ const HomeStack = () => {
           ),
         })}
       />
-      <Stack.Screen name="BookDetails" component={BookDetails} />
+      <Stack.Screen name="BookDetails" component={BookDetails} options={{headerTitle:'Book Details'}} />
     </Stack.Navigator>
   );
 };
 
 export default HomeStack;
-
-const styles = StyleSheet.create({});
