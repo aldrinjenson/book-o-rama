@@ -5,30 +5,56 @@ import {
   ActivityIndicator,
   Text,
   StyleSheet,
+  AsyncStorage,
 } from "react-native";
 import { globalStyles } from "../global/globalStyles";
 import BookCollection from "../components/BookCollection";
 import axios from "axios";
 import { query, baseUrl, apiKey } from "../config/apiKey";
+import { saveToAsyncStorage } from "../contexts/nyTimes";
 
 const HomeTab = ({ navigation }) => {
   const [topBooksList, setTopBooksList] = useState([]);
   const [netWorkError, setNetWorkError] = useState(false);
   const [extraTraffic, setExtraTraffic] = useState(false);
 
+  const fetchData = async () => {
+    const API_URL = baseUrl + query + "?api-key=" + apiKey;
+    try {
+      const res = await axios.get(API_URL);
+      setTopBooksList(res.data.results.lists);
+      saveToAsyncStorage(res.data.results.lists);
+    } catch (error) {
+      console.log("error in accessing," + error);
+      if (error.message === "Network Error") setNetWorkError(true);
+      if (error.response.status == 401) setExtraTraffic(true); // in case apiKey expired status
+    }
+  };
+
+  const getFromAsyncStorage = async () => {
+    try {
+      const stringedBestSellerListFromStorage = await AsyncStorage.getItem(
+        "SavedBestSellerList"
+      );
+      let parsedArray = JSON.parse(stringedBestSellerListFromStorage);
+      if (parsedArray) {
+        setTopBooksList(parsedArray); // in case this is the first time, the app is run
+        console.log("Retrieving from local storage");
+      } else fetchData();
+    } catch (error) {
+      console.log("Error in retrieving from storage" + error);
+      return;
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      const API_URL = baseUrl + query + "?api-key=" + apiKey;
-      try {
-        const res = await axios.get(API_URL);
-        setTopBooksList(res.data.results.lists);
-      } catch (error) {
-        console.log("error in accessing," + error);
-        if (error.message === "Network Error") setNetWorkError(true);
-        if (error.response.status == 401) setExtraTraffic(true); // in case apiKey expired status
-      }
-    };
-    fetchData();
+    var dt = new Date();
+    var x = dt.getDay();
+    if (x == 4) fetchData();
+    // get the new updated list on every thursday
+    else {
+      getFromAsyncStorage();
+    }
   }, []);
 
   return (
@@ -63,6 +89,7 @@ const HomeTab = ({ navigation }) => {
             color="0000ff"
             style={{ marginBottom: 30 }}
           />
+
           <Text style={{ marginTop: 20 }}>
             Loading New York Times' best sellers collection...
           </Text>

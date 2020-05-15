@@ -5,7 +5,7 @@ const saveToAsyncStorage = async (wishList) => {
   try {
     let stringedWishList = JSON.stringify(wishList);
     await AsyncStorage.setItem("savedWishList", stringedWishList);
-    // console.log("Successfully saved to local storage");
+    // console.log("Successfully saved wishList to local storage");
   } catch (error) {
     console.log("Error in storing to local storage" + error);
     return;
