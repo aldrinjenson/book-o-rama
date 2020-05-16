@@ -46,15 +46,21 @@ const HomeTab = ({ navigation }) => {
       return;
     }
   };
+  const getDateFromAsyncStorage = async () => {
+    const stringedSavedDate = await AsyncStorage.getItem("savedDate");
+  };
 
   useEffect(() => {
     var dt = new Date();
-    var x = dt.getDay();
-    if (x == 4) fetchData();
-    // get the new updated list on every thursday
-    else {
-      getFromAsyncStorage();
-    }
+    var today = dt.getDay();
+    var todate = dt.getDate();
+
+    if (today == 4) {
+      AsyncStorage.getItem("savedDate").then((item) => {
+        if (item == todate) getFromAsyncStorage();
+        else fetchData()
+      });
+    } else getFromAsyncStorage();
   }, []);
 
   return (
