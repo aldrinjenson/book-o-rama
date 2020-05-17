@@ -3,7 +3,6 @@ import {NavigationContainer} from '@react-navigation/native';
 import {RootDrawerNavigator} from './routes/RootDrawerNavigator';
 import {DefaultTheme, Provider as PaperProvider} from 'react-native-paper';
 import WishListContextProvider, {
-  WishListContext,
 } from './contexts/wishListContext';
 const theme = {
   ...DefaultTheme,

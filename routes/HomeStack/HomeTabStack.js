@@ -1,7 +1,7 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeTab from "../../tabs/HomeTab";
-import { MaterialIcons } from "@expo/vector-icons";
+import Icon from 'react-native-vector-icons/MaterialIcons'
 import SearchBooks from "../../tabs/SearchBooksTab";
 import WishList from "../../tabs/WishList";
 
@@ -16,21 +16,21 @@ const HomeTabStack = () => {
         name="Best Sellers"
         component={HomeTab}
         options={{
-          tabBarIcon: () => <MaterialIcons name="home" size={23} />,
+          tabBarIcon: () =>      <Icon name="home" size={23} />,
         }}
       />
       <Tab.Screen
         name="Search Books"
         component={SearchBooks}
         options={{
-          tabBarIcon: () => <MaterialIcons name="search" size={23} />,
+          tabBarIcon: () =>      <Icon name="search" size={23} />,
         }}
       />
       <Tab.Screen
         name="Wish List"
         component={WishList}
         options={{
-          tabBarIcon: () => <MaterialIcons name="bookmark" size={23} />,
+          tabBarIcon: () =>      <Icon name="bookmark" size={23} />,
         }}
       />
     </Tab.Navigator>

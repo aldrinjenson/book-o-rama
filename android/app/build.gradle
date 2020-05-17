@@ -226,3 +226,4 @@ apply from: file("../../node_modules/@react-native-community/cli-platform-androi
 
 // def enableProguardInReleaseBuilds = true
 // def enableSeparateBuildPerCPUArchitecture = true
+apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"

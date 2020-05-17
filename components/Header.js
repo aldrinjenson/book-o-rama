@@ -1,13 +1,13 @@
 import React from "react";
 import { StyleSheet, Text, View, Dimensions } from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
 const Header = ({navigation, title}) => {
   return (
     <View style={styles.headerBg}>
-      <MaterialIcons onPress={()=>navigation.openDrawer()} name="menu" size={32} style={styles.icon} />
+           <Icon onPress={()=>navigation.openDrawer()} name="menu" size={32} style={styles.icon} />
       <Text style={styles.headerTitle} >{title}</Text>
-      {/* <MaterialIcons name="book" size={32} style={styles.icon} /> */}
+      {/*      <Icon name="book" size={32} style={styles.icon} /> */}
     </View>
   );
 };

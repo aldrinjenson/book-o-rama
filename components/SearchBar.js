@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, View, TextInput, Keyboard } from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
 const SearchBar = ({ setValue, placeholder }) => {
   const [query, setQuery] = useState("");
@@ -17,7 +17,7 @@ const SearchBar = ({ setValue, placeholder }) => {
         value={query}
         onChangeText={(value) => setQuery(value)}
       />
-      <MaterialIcons name="search" size={25} onPress={handleSubmit} style={styles.icon} />
+           <Icon name="search" size={25} onPress={handleSubmit} style={styles.icon} />
     </View>
   );
 };

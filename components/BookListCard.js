@@ -1,7 +1,7 @@
-import React from "react";
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
-import { globalStyles } from "../global/globalStyles";
-import { MaterialIcons } from "@expo/vector-icons";
+import React from 'react';
+import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
+import {globalStyles} from '../global/globalStyles';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const BookListCard = ({
   imageUrl,
@@ -15,9 +15,8 @@ const BookListCard = ({
     <View style={styles.horizonatalCard}>
       <View style={styles.content}>
         <TouchableOpacity
-          onPress={() => navigation.navigate("BookDetails", book)}
-          style={styles.TouchableOpacity}
-        >
+          onPress={() => navigation.navigate('BookDetails', book)}
+          style={styles.TouchableOpacity}>
           <Image style={styles.bookImage} source={imageUrl} />
           <View style={styles.textContent}>
             <Text style={globalStyles.title}>{name}</Text>
@@ -25,7 +24,7 @@ const BookListCard = ({
           </View>
         </TouchableOpacity>
       </View>
-      <MaterialIcons
+      <Icon
         name="delete"
         size={32}
         style={styles.icon}
@@ -39,12 +38,12 @@ export default BookListCard;
 
 const styles = StyleSheet.create({
   horizonatalCard: {
-    flexDirection: "row",
+    flexDirection: 'row',
     padding: 3,
     margin: 6,
     borderWidth: 1,
-    borderColor: "#aaa",
-    alignItems: "center",
+    borderColor: '#aaa',
+    alignItems: 'center',
   },
   bookImage: {
     height: 95,
@@ -54,10 +53,10 @@ const styles = StyleSheet.create({
   },
   TouchableOpacity: {
     flex: 1,
-    flexDirection: "row",
+    flexDirection: 'row',
   },
   content: {
-    flexDirection: "row",
+    flexDirection: 'row',
     flex: 1,
   },
   textContent: {
