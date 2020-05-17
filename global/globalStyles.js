@@ -19,4 +19,9 @@ export const globalStyles = StyleSheet.create({
     color: "#aaa",
     flexWrap: "wrap",
   },
+  footer: {
+    alignSelf: "center",
+    marginVertical: 20,
+    paddingVertical: 20,
+  },
 });

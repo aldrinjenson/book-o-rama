@@ -87,6 +87,9 @@ const FeedbackPage = () => {
           </View>
         )}
       </Formik>
+      <Text style={globalStyles.footer}>
+        Made With <Image source={require("../assets/heart.png")} />
+      </Text>
     </View>
   );
 };

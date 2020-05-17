@@ -12,6 +12,8 @@ web-report/
 
 # macOS
 .DS_Store
+
+
 firebaseConfig.js
 apiKey.js
 test.js

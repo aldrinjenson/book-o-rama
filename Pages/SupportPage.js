@@ -40,7 +40,7 @@ const SupportPage = () => {
             text="Donate to Book-o-Rama"
             onPress={() => alert("Thank you")}
           />
-          <Text style={styles.footer}>
+          <Text style={globalStyles.footer}>
             Made With <Image source={require("../assets/heart.png")} />
           </Text>
         </View>
@@ -66,10 +66,5 @@ const styles = StyleSheet.create({
   cheers: {
     alignSelf: "center",
     marginVertical: 16,
-  },
-  footer: {
-    alignSelf: "center",
-    marginVertical: 20,
-    paddingVertical: 20,
-  },
+  }
 });

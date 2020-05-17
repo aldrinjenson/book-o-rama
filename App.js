@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { RootDrawerNavigator } from "./routes/RootDrawerNavigator";
 import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
