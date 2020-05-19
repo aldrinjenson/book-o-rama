@@ -17,7 +17,7 @@ const SettingsPage = () => {
       </TouchableOpacity>
       <TouchableOpacity style={styles.settingItem}>
         <Text style={styles.settingItemKey}>
-          Display No. of pages if available?
+          Show Reviews from GoodReads
         </Text>
         <Text style={styles.settingItemValue}>Coming Soon...</Text>
       </TouchableOpacity>

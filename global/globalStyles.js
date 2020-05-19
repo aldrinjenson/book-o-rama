@@ -21,7 +21,7 @@ export const globalStyles = StyleSheet.create({
   },
   footer: {
     alignSelf: "center",
-    marginVertical: 20,
-    paddingVertical: 20,
+    marginVertical: 50,
+    paddingVertical: 50,
   },
 });

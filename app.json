@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "booksapp",
-    "slug": "booksapp",
+    "name": "Book-o-rama",
+    "slug": "bookOrama",
     "platforms": [
       "ios",
       "android",
@@ -11,7 +11,7 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/splash1.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -19,10 +19,15 @@
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": [
+      "android.enableDangerousExperimentalLeanBuilds",
       "**/*"
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "android": {
+      "package": "com.ajcodes.bookOrama",
+      "versionCode": 1
     }
   }
 }

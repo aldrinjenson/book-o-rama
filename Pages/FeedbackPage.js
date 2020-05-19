@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View, StyleSheet, TextInput, Alert } from "react-native";
+import { Text, View, StyleSheet, TextInput, Alert, Image } from "react-native";
 import { globalStyles } from "../global/globalStyles";
 import { Formik } from "formik";
 import * as yup from "yup";
@@ -32,7 +32,7 @@ const feedbackSchema = yup.object({
 
 const FeedbackPage = () => {
   return (
-    <View style={globalStyles.container}>
+    <View style={styles.feedbackPage}>
       <View style={styles.textContent}>
         <Paragraph>Found a bug or met with an error ?</Paragraph>
         <Paragraph>Have an idea for a cool new feature ?</Paragraph>
@@ -114,4 +114,7 @@ const styles = StyleSheet.create({
     marginBottom: 40,
     paddingVertical: 10,
   },
+  feedbackPage:{
+    ...globalStyles.container,
+  }
 });
