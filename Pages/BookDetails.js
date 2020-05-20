@@ -46,6 +46,7 @@ const BookDetails = ({ route }) => {
         pageCount: result.data.items[0].volumeInfo.pageCount,
         isbn10:
           result.data.items[0].volumeInfo.industryIdentifiers[0].identifier,
+        accessViewStatus: result.data.items[0].accessInfo.accessViewStatus,
       });
       setIsLoaded(true);
     } catch (error) {
@@ -62,13 +63,9 @@ const BookDetails = ({ route }) => {
       setBook(route.params);
       setIsLoaded(true);
     }
-    // return () => {
-    //   cleanup
-    // }
   }, [baseUrl]); // so that the whole component will rerender in case the url changes,
   // i.e. when the book is not in the database and then another api call has to be made
 
-  // const { wishList } = useContext(WishListContext);
   const [bookAdded, setBookAdded] = useState(false);
   const [snackBarVisible, setSnackBarVisible] = useState(false);
   const [alreadyAdded, setAlreadyAdded] = useState(false);
@@ -79,7 +76,6 @@ const BookDetails = ({ route }) => {
 
     if (contains || bookAdded) {
       setAlreadyAdded(true);
-      // return;
     } else {
       addNewBookToWishList(book);
       setBookAdded(true);
@@ -122,7 +118,11 @@ const BookDetails = ({ route }) => {
                   ) : null}
                   <Button
                     style={styles.button}
-                    title="More Details"
+                    title={
+                      book.accessViewStatus == "SAMPLE"
+                        ? "Read Preview"
+                        : "More Details"
+                    }
                     onPress={() => Linking.openURL(book.previewLink)}
                   />
                 </View>
@@ -173,7 +173,6 @@ const BookDetails = ({ route }) => {
           <FAB
             style={styles.fab}
             icon="bookmark"
-            // color={}
             onPress={handleFABClick}
           />
           <Snackbar

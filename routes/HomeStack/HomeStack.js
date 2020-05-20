@@ -16,7 +16,6 @@ const HomeStack = () => {
         options={({ navigation }) => ({
           headerTitle: () => (
             <Header navigation={navigation} title="Book-o-Rama" />
-            // <Header navigation={navigation} title="Simple Book Search" />
           ),
         })}
       />

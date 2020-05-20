@@ -17,11 +17,8 @@ export default Header;
 const styles = StyleSheet.create({
   headerBg: {
     width: Dimensions.get("screen").width - 30,
-    // flex: 1,
-    // borderWidth: 1,
     flexDirection: "row",
     alignItems: "center",
-    // justifyContent:'space-between'
     justifyContent: "center",
   },
   headerTitle: {

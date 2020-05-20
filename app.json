@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Book-o-rama",
+    "name": "Book O Rama",
     "slug": "bookOrama",
     "platforms": [
       "ios",
@@ -11,7 +11,7 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/splash1.png",
+      "image": "./assets/splash2.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -28,6 +28,7 @@
     "android": {
       "package": "com.ajcodes.bookOrama",
       "versionCode": 1
-    }
+    },
+    "scheme": "booksapp"
   }
 }

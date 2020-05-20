@@ -1,22 +1,14 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { RootDrawerNavigator } from "./routes/RootDrawerNavigator";
-import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
-import WishListContextProvider, { WishListContext } from "./contexts/wishListContext";
-const theme = {
-  ...DefaultTheme,
-  // dark:true,
-  // colors:{
-  //   ...DefaultTheme.colors,
-  //   primary:'#2ab'
-  // }
-};
+import { Provider as PaperProvider } from "react-native-paper";
+import WishListContextProvider from "./contexts/wishListContext";
 
 export default function App() {
   return (
     <NavigationContainer>
       <WishListContextProvider>
-        <PaperProvider theme={theme}>
+        <PaperProvider>
           <RootDrawerNavigator />
         </PaperProvider>
       </WishListContextProvider>
