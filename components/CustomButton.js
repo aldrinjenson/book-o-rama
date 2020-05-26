@@ -1,13 +1,13 @@
 import React from "react";
-import { Text, View, StyleSheet, TouchableNativeFeedback } from "react-native";
+import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 
 const CustomButton = ({ text, onPress }) => {
   return (
-    <TouchableNativeFeedback onPress={onPress}>
+    <TouchableOpacity onPress={onPress}>
       <View style={styles.button}>
         <Text style={styles.buttonText}>{text}</Text>
       </View>
-    </TouchableNativeFeedback> // Note: this works for android only, make sure to change it to touchableopacity if making for ios
+    </TouchableOpacity> // Note: this works for android only, make sure to change it to touchableopacity if making for ios
   );
 };
 

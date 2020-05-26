@@ -6,6 +6,7 @@ import {
   Text,
   StyleSheet,
   AsyncStorage,
+  ScrollView,
 } from "react-native";
 import { globalStyles } from "../global/globalStyles";
 import BookCollection from "../components/BookCollection";
@@ -82,56 +83,58 @@ const HomeTab = ({ navigation }) => {
   }, []);
 
   return (
-    <View style={{ ...globalStyles.container, justifyContent: "flex-start" }}>
-      {netWorkError ? (
-        <View style={styles.errorMessage}>
-          <Text style={{ marginTop: 4, paddingTop: 2 }}>
-            There seems to be some network delay
-          </Text>
-          <Text style={{ marginTop: 4, paddingTop: 2 }}>
-            Please check your internet connectivity!!
-          </Text>
-        </View>
-      ) : extraTraffic ? (
-        <View style={styles.errorMessage}>
-          <Text>Whew...</Text>
-          <Text style={{ marginTop: 4, paddingTop: 2, flexWrap: "nowrap" }}>
-            There seems to be some extra network traffic at this moment to the
-            database
-          </Text>
-          <Text style={{ marginTop: 4, paddingTop: 2 }}>
-            Please try again after some time
-          </Text>
-        </View>
-      ) : null}
-      {!topBooksList.length ? (
-        <View
-          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-        >
-          <ActivityIndicator
-            size="large"
-            color="0000ff"
-            style={{ marginBottom: 30 }}
-          />
-
-          <Text style={{ marginTop: 20 }}>
-            Loading New York Times' best sellers collection...
-          </Text>
-        </View>
-      ) : (
-        <FlatList
-          keyExtractor={(item, index) => item.list_id.toString()}
-          data={topBooksList}
-          renderItem={({ item }) => (
-            <BookCollection
-              key={item.list_id}
-              collection={item}
-              navigation={navigation}
+    // <ScrollView>
+      <View style={{ ...globalStyles.container, justifyContent: "flex-start" , flex: 1}}>
+        {netWorkError ? (
+          <View style={styles.errorMessage}>
+            <Text style={{ marginTop: 4, paddingTop: 2 }}>
+              There seems to be some network delay
+            </Text>
+            <Text style={{ marginTop: 4, paddingTop: 2 }}>
+              Please check your internet connectivity!!
+            </Text>
+          </View>
+        ) : extraTraffic ? (
+          <View style={styles.errorMessage}>
+            <Text>Whew...</Text>
+            <Text style={{ marginTop: 4, paddingTop: 2, flexWrap: "nowrap" }}>
+              There seems to be some extra network traffic at this moment to the
+              database
+            </Text>
+            <Text style={{ marginTop: 4, paddingTop: 2 }}>
+              Please try again after some time
+            </Text>
+          </View>
+        ) : null}
+        {!topBooksList.length ? (
+          <View
+            style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+          >
+            <ActivityIndicator
+              size="large"
+              color="0000ff"
+              style={{ marginBottom: 30 }}
             />
-          )}
-        />
-      )}
-    </View>
+
+            <Text style={{ marginTop: 20 }}>
+              Loading New York Times' best sellers collection...
+            </Text>
+          </View>
+        ) : (
+          <FlatList
+            keyExtractor={(item, index) => item.list_id.toString()}
+            data={topBooksList}
+            renderItem={({ item }) => (
+              <BookCollection
+                key={item.list_id}
+                collection={item}
+                navigation={navigation}
+              />
+            )}
+          />
+        )}
+      </View>
+    // </ScrollView>
   );
 };
 

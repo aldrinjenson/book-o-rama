@@ -95,7 +95,8 @@ export default DisplayBooks;
 
 const styles = StyleSheet.create({
   bookList: {
-    marginBottom: 120,
+    flex: 1,
+    flexDirection:'row'
   },
   horizonatalCard: {
     borderWidth: 1,

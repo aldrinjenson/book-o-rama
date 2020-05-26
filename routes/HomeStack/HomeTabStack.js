@@ -10,27 +10,26 @@ const Tab = createBottomTabNavigator();
 const HomeTabStack = () => {
   return (
     <Tab.Navigator
-    // initialRouteName='SearchBooks'
     >
       <Tab.Screen
         name="Best Sellers"
         component={HomeTab}
         options={{
-          tabBarIcon: () => <MaterialIcons name="home" size={23} />,
+          tabBarIcon: ({focused}) => <MaterialIcons color={focused ? '#2f95dc' : null} name="home" size={23} />,
         }}
       />
       <Tab.Screen
         name="Search Books"
         component={SearchBooks}
         options={{
-          tabBarIcon: () => <MaterialIcons name="search" size={23} />,
+          tabBarIcon: ({focused}) => <MaterialIcons color={focused ? '#2f95dc' : null} name="search" size={23} />,
         }}
       />
       <Tab.Screen
         name="Wish List"
         component={WishList}
         options={{
-          tabBarIcon: () => <MaterialIcons name="bookmark" size={23} />,
+          tabBarIcon: ({focused}) => <MaterialIcons color={focused ? '#2f95dc' : null} name="bookmark" size={23} />,
         }}
       />
     </Tab.Navigator>

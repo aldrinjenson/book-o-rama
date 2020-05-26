@@ -6,9 +6,9 @@ const SearchBar = ({ setValue, placeholder }) => {
   const [query, setQuery] = useState("");
 
   const handleSubmit = () => {
-    setValue(query);
-    Keyboard.dismiss()
-};
+    if (query) setValue(query);
+    Keyboard.dismiss();
+  };
 
   return (
     <View style={styles.searchBar}>
@@ -17,7 +17,12 @@ const SearchBar = ({ setValue, placeholder }) => {
         value={query}
         onChangeText={(value) => setQuery(value)}
       />
-      <MaterialIcons name="search" size={25} onPress={handleSubmit} style={styles.icon} />
+      <MaterialIcons
+        name="search"
+        size={25}
+        onPress={handleSubmit}
+        style={styles.icon}
+      />
     </View>
   );
 };
@@ -36,9 +41,9 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     alignSelf: "center",
   },
-  icon:{
+  icon: {
     paddingHorizontal: 18,
     paddingVertical: 4,
-    paddingRight:8
-  }
+    paddingRight: 8,
+  },
 });
