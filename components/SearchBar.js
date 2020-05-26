@@ -9,13 +9,12 @@ const SearchBar = ({ setValue, placeholder }) => {
     if (query) setValue(query);
     Keyboard.dismiss();
   };
-
   return (
     <View style={styles.searchBar}>
       <TextInput
         placeholder={placeholder}
         value={query}
-        onChangeText={(value) => setQuery(value)}
+        onKeyPress={(key) => (key.key === "Enter" ? handleSubmit() : null)}
       />
       <MaterialIcons
         name="search"
